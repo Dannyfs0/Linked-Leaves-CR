@@ -1,0 +1,1039 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Linked Leaves - Árboles de la Peninsula de Osa</title>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                background-color: #f4f4f4;
+                text-align: center;
+            }
+
+            header {
+                background-color: #046e50;
+                color: #fff;
+                padding: 20px 0;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 2.5em;
+            }
+
+            .gallery {
+                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 20px;
+                margin-bottom: 60px;
+            }
+
+            .gallery img {
+                width: 200px;
+                height: 150px;
+                margin: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                object-fit: cover;
+            }
+
+            .gallery img:hover {
+                transform: scale(1.1);
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                justify-content: center;
+                align-items: center;
+                z-index: 2000;
+            }
+
+            .modal-content {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 500px;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .modal-content h2 {
+                margin-top: 0;
+            }
+
+            .close {
+                float: right;
+                font-size: 1.5em;
+                cursor: pointer;
+            }
+
+            footer {
+                background-color: #046e50;
+                color: #fff;
+                padding: 10px 0;
+                text-align: center;
+                width: 100%;
+                position: relative;
+                bottom: 0;
+                z-index: 1000;
+            }
+
+            .tree-item img,
+            .modal-img {
+                width: 470px;
+                height: 390px;
+                object-fit: cover;
+                border-radius: 10px;
+                display: block;
+                margin: 0 auto 15px;
+            }
+
+            #filterBar input[type="text"] {
+                padding: 10px;
+                width: 250px;
+                border-radius: 5px 0 0 5px;
+                border: 2px solid #145A32;
+                font-size: 1rem;
+                outline: none;
+                background-color: #eafaf1;
+                color: #145A32;
+                transition: border-color 0.3s;
+            }
+
+            #filterBar input[type="text"]:focus {
+                border-color: #8D6748;
+            }
+
+            #filterBar select {
+                padding: 10px;
+                border-radius: 0;
+                border: 2px solid #145A32;
+                font-size: 1rem;
+                background-color: #eafaf1;
+                color: #145A32;
+                margin-left: -4px;
+                transition: border-color 0.3s;
+            }
+
+            #filterBar button {
+                padding: 10px 20px;
+                border-radius: 0 5px 5px 0;
+                border: none;
+                background-color: #8D6748;
+                color: #fff;
+                font-size: 1rem;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background 0.3s;
+            }
+
+            #filterBar button:hover {
+                background-color: #145A32;
+            }
+
+            #statusFilter,
+            #statusFilter option {
+                font-style: italic;
+            }
+
+            @media screen and (max-width: 600px) {
+                .modal-content {
+                    width: 90%;
+                    max-width: 90%;
+                }
+
+                .tree-item img,
+                .modal-img,
+                .gallery img {
+                    width: 90%;
+                    height: auto;
+                }
+            }
+        </style>
+    </head>
+<body>
+    <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
+        <img src="imagenes/logo.jpg" alt="Logo de Linked Leaves" style="width: 120px; height: auto;">
+    </div>
+
+    <header>
+        <h1><em>Linked Leaves CR</em></h1>
+        <p><em>Descubre los árboles de la Peninsula de Osa</em></p>
+    </header>
+
+    <div id="filterBar" style="margin: 20px 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <input type="text" id="searchInput" placeholder="Buscar árbol por nombre..." oninput="filterGallery()">
+        <select id="statusFilter" onchange="filterGallery()">
+            <option value="">Todos</option>
+            <option value="En peligro">En peligro</option>
+            <option value="No en peligro">No en peligro</option>
+            <option value="Vulnerable">Vulnerable</option>
+            <option value="Sin datos específicos">Sin datos específicos</option>
+        </select>
+    </div>
+
+    <div class="gallery">
+    <img src="imagenes/Amyris magnifolia.jpg" alt="Amyris magnifolia" onclick="openModal('modal1')" data-status="Vulnerable">
+    <img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo negro - Cascarillo" onclick="openModal('modal2')" data-status="En peligro">
+    <img src="imagenes/Ron-ron.jpg" alt="Ron-ron" onclick="openModal('modal3')" data-status="En peligro">
+    <img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" onclick="openModal('modal4')" data-status="Vulnerable">
+    <img src="imagenes/Escobo, Cascarillo.jpg" alt="Escobo, Cascarillo" onclick="openModal('modal5')" data-status="En peligro">
+    <img src="imagenes/Cascarillo.jpg" alt="Cascarillo" onclick="openModal('modal6')" data-status="Vulnerable">
+    <img src="imagenes/Níspero.jpg" alt="Níspero" onclick="openModal('modal7')" data-status="Vulnerable">
+    <img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo barrigón" onclick="openModal('modal8')" data-status="No en peligro">
+    <img src="imagenes/Ajo.jpg" alt="Ajo" onclick="openModal('modal9')" data-status="En peligro">
+    <img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" onclick="openModal('modal10')" data-status="En peligro">
+    <img src="imagenes/Cedro amargo.jpg" alt="Cedro amargo" onclick="openModal('modal11')" data-status="Vulnerable">
+    <img src="imagenes/Ceiba.jpg" alt="Ceiba" onclick="openModal('modal12')" data-status="No en peligro">
+    <img src="imagenes/Camibar.jpg" alt="Camibar" onclick="openModal('modal13')" data-status="En peligro">
+    <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo hediondo - Buriyon" onclick="openModal('modal14')" data-status="Vulnerable">
+    <img src="imagenes/Matasano.jpg" alt="Matasano" onclick="openModal('modal15')" data-status="En peligro">
+    <img src="imagenes/Guapinol negro.jpg" alt="Guapinol negro" onclick="openModal('modal16')" data-status="No en peligro">
+    <img src="imagenes/Carey.jpg" alt="Carey" onclick="openModal('modal17')" data-status="Vulnerable">
+    <img src="imagenes/Corteza amarillo.jpeg" alt="Tall Corteza amarillo tree with bright yellow-green leaves standing against a blue sky with scattered clouds, conveying a calm and vibrant natural environment" onclick="openModal('modal18')" data-status="Vulnerable">
+    <img src="imagenes/Naranjillo.jpg" alt="Naranjillo" onclick="openModal('modal19')" data-status="Vulnerable">
+    <img src="imagenes/Chiricano alegre.jpg" alt="Chiricano alegre" onclick="openModal('modal20')" data-status="Vulnerable">
+    <img src="imagenes/Guaba.jpeg" alt="Guaba" onclick="openModal('modal21')" data-status="En peligro">
+    <img src="imagenes/Manu.jpeg" alt="Manu" onclick="openModal('modal22')" data-status="En peligro">
+    <img src="imagenes/Mangle nato.jpeg" alt="Mangle nato" onclick="openModal('modal23')" data-status="Vulnerable">
+    <img src="imagenes/Sandalo.jpg" alt="Sándalo" onclick="openModal('modal24')" data-status="En peligro">
+    <img src="imagenes/Laurel.jpg" alt="Laurel" onclick="openModal('modal25')" data-status="Vulnerable">
+    <img src="imagenes/Ocotea.jpg" alt="Ocotea" onclick="openModal('modal26')" data-status="No en peligro">
+    <img src="imagenes/Gavilán.jpg" alt="Gavilán" onclick="openModal('modal27')" data-status="En peligro">
+    <img src="imagenes/Sangrillo.jpg" alt="Sangrillo" onclick="openModal('modal28')" data-status="En peligro">
+    <img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" onclick="openModal('modal29')" data-status="En peligro">
+    <img src="imagenes/Cachimbo.jpg" alt="Cachimbo" onclick="openModal('modal30')" data-status="En peligro">
+    <img src="imagenes/Pinillo.jpeg" alt="Pinillo" onclick="openModal('modal31')" data-status="En peligro">
+    <img src="imagenes/Cativo.jpeg" alt="Cativo" onclick="openModal('modal32')" data-status="En peligro">
+    <img src="imagenes/Iguano.jpg" alt="Iguano" onclick="openModal('modal33')" data-status="Sin datos específicos">
+    <img src="imagenes/Guachipelín.jpg" alt="Guachipelín" onclick="openModal('modal34')" data-status="Sin datos específicos">
+    <img src="imagenes/Cedro caracolito.jpg" alt="Cedro caracolito" onclick="openModal('modal35')" data-status="Sin datos específicos">
+    <img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" onclick="openModal('modal36')" data-status="En peligro">
+    <img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal37')" data-status="No en peligro">
+    <img src="imagenes/nazareno.jpg" alt="nazareno" onclick="openModal('modal38')" data-status="En peligro">
+    <img src="imagenes/Hule.jpg" alt="Hule" onclick="openModal('modal39')" data-status="No en peligro">
+    <img src="imagenes/cacao.png" alt="cacao" onclick="openModal('modal40')" data-status="No en peligro">
+    <img src="imagenes/Níspero zapote.jpg" alt="Níspero zapote" onclick="openModal('modal41')" data-status="Sin datos específicos">
+    <img src="imagenes/bongo.jpeg" alt="bongo" onclick="openModal('modal42')" data-status="Sin datos específicos">
+    <img src="imagenes/Fruta dorada.jpg" alt="Fruta dorada" onclick="openModal('modal43')" data-status="No en peligro">
+    <img src="imagenes/Guácimo.jpg" alt="Guácimo" onclick="openModal('modal44')" data-status="No en peligro">
+    <img src="imagenes/Chilamate.jpg" alt="Chilamate" onclick="openModal('modal45')" data-status="No en peligro">
+    <img src="imagenes/Ojoche.jpg" alt="Ojoche" onclick="openModal('modal46')" data-status="No en peligro">
+    <img src="imagenes/Manú plátano.jpeg" alt="Manú plátano" onclick="openModal('modal47')" data-status="No en peligro">
+    <img src="imagenes/Árbol jicaro.jpeg" alt="Árbol jicaro" onclick="openModal('modal48')" data-status="No en peligro">
+    <img src="imagenes/Nance.jpg" alt="Nance" onclick="openModal('modal49')" data-status="No en peligro">
+    <img src="imagenes/Caimito.jpg" alt="Caimito" onclick="openModal('modal50')" data-status="No en peligro">
+    <img src="imagenes/Guayabón.jpg" alt="Guayabón" onclick="openModal('modal51')" data-status="No en peligro">
+    <img src="imagenes/Jobo negro.jpg" alt="Jobo negro" onclick="openModal('modal52')" data-status="No en peligro">
+    <img src="imagenes/pejibaye.jpeg" alt="pejibaye" onclick="openModal('modal53')" data-status="No en peligro">
+    <img src="imagenes/Zapotillo.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal54')" data-status="Sin datos específicos">
+    <img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" onclick="openModal('modal55')" data-status="Sin datos específicos">
+    <img src="imagenes/Guanábana.jpeg" alt="Guanábana" onclick="openModal('modal56')" data-status="No en peligro">
+    <img src="imagenes/biribá.jpg" alt="biribá" onclick="openModal('modal57')" data-status="No en peligro">
+    <img src="imagenes/Anonillo.jpg" alt="Anonillo" onclick="openModal('modal58')" data-status="Sin datos específicos">
+    <img src="imagenes/Guayaba.jpg" alt="Guayaba" onclick="openModal('modal59')" data-status="No en peligro">
+    <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" onclick="openModal('modal60')" data-status="No en peligro">
+    <img src="imagenes/Mango.jpg" alt="Mango" onclick="openModal('modal61')" data-status="No en peligro">
+    <img src="imagenes/Aguacate.JPG" alt="aguacate" onclick="openModal('modal62')" data-status="No en peligro">
+    <img src="imagenes/Balsa.jpg" alt="Balsa" onclick="openModal('modal63')" data-status="No en peligro">
+    <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" onclick="openModal('modal64')" data-status="No en peligro">
+</div>
+</div>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h2>Guinízaro o Elemí.</h2>
+        <img src="imagenes/Amyris magnifolia.jpg" alt="Guinízaro o Elemí" class="modal-img">
+        <p><strong>Estado:</strong> Vulnerable.</p>
+        <p> Familia:RUTACEAE.
+            <br></br>
+            Nombre Científico:Amyris magnifolia.
+    </div>
+</div>
+
+
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <h2>Ajo Negro</h2>
+        <img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo negro - Cascarillo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        <p> Familia:CARYOCARACEAE.
+            <br></br>
+            Nombre  Científico:Anthodiscus chocoensis.
+    </div>
+</div>
+
+
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal3')">&times;</span>
+        <h2>Ron-Ron</h2>
+        <img src="imagenes/Ron-ron.jpg" alt="Ron-ron" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:ANACARDIACEAE.
+        <br></br>
+        Nombre Científico:Astronium graveolens.
+    </div>
+</div>
+
+
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal4')">&times;</span>
+        <h2>Ajillo - Ardillo</h2>
+        <img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" class="modal-img">
+        <p><strong>Estado:</strong> Vulnerable.</p>
+        Familia:FABACEAE/MIM.
+        <br></br>
+        Nombre Científico:Balizia elegans.
+    </div>
+</div>
+
+
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal5')">&times;</span>
+        <h2>Escobo</h2>
+        <img src="imagenes/Escobo, Cascarillo.jpg" alt="Escobo, Cascarillo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:COMBRETACEAE.
+        <br></br>
+        Nombre Científico:Buchenavia costaricensis.
+    </div>
+</div>
+
+
+<div id="modal6" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal6')">&times;</span>
+        <h2>Cascarillo</h2>
+        <img src="imagenes/Cascarillo.jpg" alt="Cascarillo" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:COMBRETACEAE.
+        <br></br>
+        Nombre Científico:Buchenavia tetraphylla.
+    </div>
+</div>
+
+
+<div id="modal7" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal7')">&times;</span>
+        <h2>Níspero</h2>
+        <img src="imagenes/Níspero.jpg" alt="Níspero" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:Sapotaceae.
+        <br></br>
+        Nombre Científico:Manilkara chicle.
+    </div>
+</div>
+
+
+<div id="modal8" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal8')">&times;</span>
+        <h2>Ceibo barrigón</h2>
+        <img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo barrigón" class="modal-img">
+        <p><strong>Estado:</strong>No en peligro.</p>
+        Familia:Malvaceae.
+        <br></br>
+        Nombre Científico:Pseudobombax septenatum.
+    </div>
+</div>
+
+
+<div id="modal9" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal9')">&times;</span>
+        <h2>Ajo</h2>
+        <img src="imagenes/Ajo.jpg" alt="Ajo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:CARYOCARACEAE.
+        <br></br>
+        Nombre Científico:Caryocar costaricense.
+    </div>
+</div>
+
+
+<div id="modal10" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal10')">&times;</span>
+        <h2>Cirri - Quiral</h2>
+        <img src="imagenes/Cirri - Quira.jpg" alt="Cirri-Quiral" class="modal-img">
+        <p><strong>Estado:</strong> En peligro.</p>
+        Familia:LAURACEAE.
+        <br></br>
+        Nombre Científico:Caryodaphnopsis burgerii.
+    </div>
+</div>
+
+
+<div id="modal11" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal11')">&times;</span>
+        <h2>Cedro Amargo</h2>
+        <img src="imagenes/Cedro amargo.jpg" alt="Cedro amargo" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia: MELIACEAE.
+        <br></br>
+        Nombre Científico:Cedrela odorata.
+    </div>
+</div>
+
+
+<div id="modal12" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal12')">&times;</span>
+        <h2>Ceiba</h2>
+        <img src="imagenes/Ceiba.jpg" alt="Ceiba" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:BOMBACACEAE.
+        <br></br>
+        Nombre Científico:Ceiba pentandra.
+    </div>
+</div>
+
+
+<div id="modal13" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal13')">&times;</span>
+        <h2>Camibar</h2>
+        <img src="imagenes/Camibar.jpg" alt="Camibar" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Copaifera aromatica.
+    </div>
+</div>
+
+
+<div id="modal14" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal14')">&times;</span>
+        <h2>Copo Hediondo - Buriyon</h2>
+        <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo hediondo - Buriyon" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:LECYTHIDACEAE.
+        <br></br>
+        Nombre Científico:Couroupita guianensis.
+    </div>
+</div>
+
+
+<div id="modal15" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal15')">&times;</span>
+        <h2>Matasano</h2>
+        <img src="imagenes/Matasano.jpg" alt="Matasano" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:LECYTHIDACEAE.
+        <br></br>
+        Nombre Científico:Couratari scottmorii.
+    </div>
+</div>
+
+
+<div id="modal16" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal16')">&times;</span>
+        <h2>Guapinol Negro</h2>
+        <img src="imagenes/Guapinol negro.jpg" alt="Guapinol negro" class="modal-img">
+        <p><strong>Estado:</strong> NO en peligro.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Cynometra hemitomophylla.
+    </div>
+</div>
+
+
+<div id="modal17" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal17')">&times;</span>
+        <h2>Carey</h2>
+        <img src="imagenes/Carey.jpg" alt="Carey" class="modal-img">
+        <p><strong>Estado:</strong> Vulnerable.</p>
+        Familia:SAPOTACEAE.
+        <br></br>
+        Nombre Científico:Elaeoluma glabrescens.
+    </div>
+</div>
+
+
+<div id="modal18" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal18')">&times;</span>
+        <h2>Corteza Amarillo</h2>
+       <img src="imagenes/Corteza amarillo.jpeg" alt="Carey" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:BIGNONIACEAE.
+        <br></br>
+        Nombre Científico:Handroantus guayacan.
+    </div>
+</div>
+
+<div id="modal19" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal19')">&times;</span>
+        <h2>Naranjillo</h2>
+        <img src="imagenes/Naranjillo.jpg" alt="Naranjillo" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:MENISPERMACEAE.
+        <br></br>
+        Nombre Científico:Hyperbaena leptobotryosa.
+    </div>
+</div>
+
+
+<div id="modal20" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal20')">&times;</span>
+        <h2>Chiricano Alegre</h2>
+        <img src="imagenes/Chiricano alegre.jpg" alt="Chiricano alegre" class="modal-img">
+        <p><strong>Estado:</strong> Vulnerable.</p>
+        Familia:HUMIRIACEAE.
+        <br></br>
+        Nombre Científico:Humiriastrum diguense.
+    </div>
+</div>
+
+<div id="modal21" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal21')">&times;</span>
+        <h2>Guaba</h2>
+        <img src="imagenes/Guaba.jpeg" alt="Guaba" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/MIM.
+        <br></br>
+        Nombre Científico:Inga golfodulcensis.
+    </div>
+</div>
+
+<div id="modal22" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal22')">&times;</span>
+        <h2>Manu</h2>
+        <img src="imagenes/Manu.jpeg" alt="Manu" class="modal-img">
+        <p><strong>Estado:</strong> En peligro.</p>
+        Familia:OLACACEAE.
+        <br></br>
+        Nombre Científico:Minquartia guianensis.
+    </div>
+</div>
+
+<div id="modal23" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal23')">&times;</span>
+        <h2>Mangle Nato</h2>
+        <img src="imagenes/Mangle nato.jpeg" alt="Mangle nato" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Mora oleifera.
+    </div>
+</div>
+<div id="modal24" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal24')">&times;</span>
+        <h2>Sándalo</h2>
+        <img src="imagenes/Sandalo.jpg" alt="Sándalo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Myroxylon balsamum.
+    </div>
+</div>
+<div id="modal25" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal25')">&times;</span>
+        <h2>Laurel</h2>
+        <img src="imagenes/Laurel.jpg" alt="Laurel" class="modal-img">
+        <p><strong>Estado:</strong>Vulnerable.</p>
+        Familia:LAURACEAE.
+        <br></br>
+        Nombre Científico:Nectandra hypoleuca.
+    </div>
+</div>
+<div id="modal26" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal26')">&times;</span>
+        <h2>Ocotea</h2>
+        <img src="imagenes/Ocotea.jpg" alt="Ocotea" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:LAURACEAE.
+        <br></br>
+        Nombre Científico:Ocotea patula.
+    </div>
+</div>
+<div id="modal27" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal27')">&times;</span>
+        <h2>Gavilán</h2>
+        <img src="imagenes/Gavilán.jpg" alt="Gavilán" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:JUGLANDACEAE.
+        <br></br>
+        Nombre Científico:Oreomunnea pterocarpa.
+    </div>
+</div>
+<div id="modal28" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal28')">&times;</span>
+        <h2>Sangrillo</h2>
+        <img src="imagenes/Sangrillo.jpg" alt="Sangrillo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/MIM.
+        <br></br>
+        Nombre Científico:Paramachaerium gruberi.
+    </div>
+</div>
+<div id="modal29" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal29')">&times;</span>
+        <h2>Guanacastillo - Ardillo - Tamarindón</h2>
+        <img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/MIM.
+        <br></br>
+        Nombre Científico:Parkia pendula.
+    </div>
+</div>
+<div id="modal30" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal30')">&times;</span>
+        <h2>Cachimbo</h2>
+        <img src="imagenes/Cachimbo.jpg" alt="Cachimbo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Platymiscium pinnatum.
+    </div>
+</div>
+<div id="modal31" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal31')">&times;</span>
+        <h2>Pinillo</h2>
+        <img src="imagenes/Pinillo.jpeg" alt="Pinillo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:PODOCARPACEAE.
+        <br></br>
+        Nombre Científico:Podocarpus guatemalensis.
+    </div>
+</div>
+<div id="modal32" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal32')">&times;</span>
+        <h2>Cativo</h2>
+        <img src="imagenes/Cativo.jpeg" alt="Cativo" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Prioria copaifera.
+    </div>
+</div>
+<div id="modal33" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal33')">&times;</span>
+        <h2>Iguano</h2>
+        <img src="imagenes/Iguano.jpg" alt="Iguano" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Pseudopiptadenea suaveolens.
+    </div>
+</div>
+<div id="modal34" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal34')">&times;</span>
+        <h2>Guachipelín</h2>
+        <img src="imagenes/Guachipelín.jpg" alt="Guachipelín" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Phyllocarpus riedelii.
+    </div>
+</div>
+<div id="modal35" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal35')">&times;</span>
+        <h2>Cedro Caracolito</h2>
+        <img src="imagenes/Cedro caracolito.jpg" alt="Cedro caracolito" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:LEPIDOBOTRYACEAE.
+        <br></br>
+        Nombre Científico:Ruptiliocarpon caracolito.
+    </div>
+</div>
+<div id="modal36" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal36')">&times;</span>
+        <h2>Reseco - Alazan</h2>
+        <img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE/CAES.
+        <br></br>
+        Nombre Científico:Tachigali versicolor.
+    </div>
+</div>
+<div id="modal37" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal37')">&times;</span>
+        <h2>Tamarindo - Almendro</h2>
+        <img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:FABACEAE/PAP.
+        <br></br>
+        Nombre Científico:Uribea tamarindoides.
+    </div>
+</div>
+<div id="modal38" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal38')">&times;</span>
+        <h2>Nazareno</h2>
+        <img src="imagenes/nazareno.jpg" alt="nazareno" class="modal-img">
+        <p><strong>Estado:</strong>En peligro.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Peltogyne purpurea
+    </div>
+</div>
+<div id="modal39" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal39')">&times;</span>
+        <h2>Hule</h2>
+        <img src="imagenes/Hule.jpg" alt="Hule" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MORACEAE.
+        <br></br>
+        Nombre Científico:Castilla tunu.
+    </div>
+</div>
+<div id="modal40" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal40')">&times;</span>
+        <h2>Cacao</h2>
+        <img src="imagenes/cacao.png" alt="cacao" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MALVACEAE.
+        <br></br>
+        Nombre Científico:Theobroma cacao.
+    </div>
+</div>
+<div id="modal41" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal41')">&times;</span>
+        <h2>Níspero Zapote</h2>
+        <img src="imagenes/Níspero zapote.jpg" alt="Níspero zapote" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:SAPOTACEAE.
+        <br></br>
+        Nombre Científico:Manilkara staminodella.
+    </div>
+</div>
+<div id="modal42" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal42')">&times;</span>
+        <h2>Bongo</h2>
+        <img src="imagenes/bongo.jpeg" alt="bongo" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Zygia rubiginosa.
+    </div>
+</div>
+<div id="modal43" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal43')">&times;</span>
+        <h2>Fruta Dorada</h2>
+        <img src="imagenes/Fruta dorada.jpg" alt="Fruta dorada" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MYRISTICACEAE.
+        <br></br>
+        Nombre Científico:Virola sebifera.
+    </div>
+</div>
+<div id="modal44" class="modal">
+    <div class="modal-content"> 
+        <span class="close" onclick="closeModal('modal44')">&times;</span>
+        <h2>Guácimo</h2>
+        <img src="imagenes/Guácimo.jpg" alt="Guácimo" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MALVACEAE.
+        <br></br>
+        Nombre Científico:Guazuma ulmifolia.
+    </div>
+</div>
+<div id="modal45" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal45')">&times;</span>
+        <h2>Chilamate</h2>
+        <img src="imagenes/Chilamate.jpg" alt="Chilamate" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MORACEAE.
+        <br></br>
+        Nombre Científico:Ficus insipida.
+    </div>
+</div>
+<div id="modal46" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal46')">&times;</span>
+        <h2>Ojoche</h2>
+        <img src="imagenes/Ojoche.jpg" alt="Ojoche" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MORACEAE.
+        <br></br>
+        Nombre Científico:Brosimum alicastrum.
+    </div>
+</div>
+<div id="modal47" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal47')">&times;</span>
+        <h2>Manú Plátano</h2>
+        <img src="imagenes/Manú plátano.jpeg" alt="Manú plátano" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:LAMIACEAE.
+        <br></br>
+        Nombre Científico:Vitex cooperi.
+    </div>
+</div>
+<div id="modal48" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal48')">&times;</span>
+        <h2>Árbol Jicaro</h2>
+        <img src="imagenes/Árbol jicaro.jpeg" alt="Árbol jicaro" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:BIGNONIACEAE.
+        <br></br>
+        Nombre Científico:Crescentia cujete.
+    </div>
+</div>
+<div id="modal49" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal49')">&times;</span>
+        <h2>Nance</h2>
+        <img src="imagenes/Nance.jpg" alt="Nance" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MALPIGHIACEAE.
+        <br></br>
+        Nombre Científico:Byrsonima crassifolia.
+    </div>
+</div>
+<div id="modal50" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal50')">&times;</span>
+        <h2>Caimito</h2>
+        <img src="imagenes/Caimito.jpg" alt="Caimito" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:SAPOTACEAE.
+        <br></br>
+        Nombre Científico:Chrysophyllum cainito.
+    </div>
+</div>
+<div id="modal51" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal51')">&times;</span>
+        <h2>Guayabón</h2>
+        <img src="imagenes/Guayabón.jpg" alt="Guayabón" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:COMBRETACEAE.
+        <br></br>
+        Nombre Científico:Terminalia oblonga.
+    </div>
+</div>
+<div id="modal52" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal52')">&times;</span>
+        <h2>Jobo Negro</h2>
+        <img src="imagenes/Jobo negro.jpg" alt="Jobo negro" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:ANACARDIACEAE.
+        <br></br>
+        Nombre Científico:Spondias radlkoferi.
+    </div>
+</div>
+<div id="modal53" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal53')">&times;</span>
+        <h2>Pejibaye</h2>
+        <img src="imagenes/pejibaye.jpeg" alt="pejibaye" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:ARECACEAE.
+        <br></br>
+        Nombre Científico:Bactris gasipaes.
+    </div>
+</div>
+<div id="modal54" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal54')">&times;</span>
+        <h2>Zapotillo</h2>
+        <img src="imagenes/Zapotillo.jpg" alt="Zapotillo" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:SAPOTACEAE.
+        <br></br>
+        Nombre Científico:Pouteria spicata.
+    </div>
+</div>
+<div id="modal55" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal55')">&times;</span>
+        <h2>Almendro de Río</h2>
+        <img src="imagenes/Almendro de Río.jpg" alt="Almendro de  Río" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:FABACEAE.
+        <br></br>
+        Nombre Científico:Andira inermis.
+    </div>
+</div>
+<div id="modal56" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal56')">&times;</span>
+        <h2>Guanábana</h2>
+        <img src="imagenes/Guanábana.jpeg" alt="Guanábana" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:ANNONACEAE.
+        <br></br>
+        Nombre Científico:Annona muricata.
+    </div>
+</div>
+<div id="modal57" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal57')">&times;</span>
+        <h2>biribá</h2>
+        <img src="imagenes/biribá.jpg" alt="biribá" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:ANNONACEAE.
+        <br></br>
+        Nombre Científico:Annona mucosa.
+    </div>
+</div>
+<div id="modal58" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal58')">&times;</span>
+        <h2>Anonillo</h2>
+        <img src="imagenes/Anonillo.jpg" alt="Anonillo" class="modal-img">
+        <p><strong>Estado:</strong>Sin datos específicos.</p>
+        Familia:ANNONACEAE.
+        <br></br>
+        Nombre Científico:Cymbopetalum costaricense.
+    </div>
+</div>
+<div id="modal59" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal59')">&times;</span>
+        <h2>Guayaba</h2>
+        <img src="imagenes/Guayaba.jpg" alt="Guayaba" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MYRTACEAE
+        <br></br>
+        Nombre Científico:Psidium guajava.
+    </div>
+</div>
+<div id="modal60" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal60')">&times;</span>
+        <h2>Manzana de Agua</h2>
+        <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MYRTACEAE.
+        <br></br>
+        Nombre Científico:Syzygium jambos.
+    </div>
+</div>
+<div id="modal61" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal61')">&times;</span>
+        <h2>Mango</h2>
+        <img src="imagenes/Mango.jpg" alt="Mango" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:ANACARDIACEAE
+        <br></br>
+        Nombre Científico:Mangifera indica.
+    </div>
+</div>
+<div id="modal62" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal47')">&times;</span>
+        <h2>Aguacate</h2>
+        <img src="imagenes/Aguacate.JPG" alt="Aguacate" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:LAURACEAE
+        <br></br>
+        Nombre Científico:Persea americana.
+    </div>
+</div>
+<div id="modal63" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal63')">&times;</span>
+        <h2>Balsa</h2>
+        <img src="imagenes/Balsa.jpg" alt="Balsa" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:MALVACEAE
+        <br></br>
+        Nombre Científico:Ochroma pyramidale.
+    </div>
+</div>
+<div id="modal64" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('modal47')">&times;</span>
+        <h2>Aguacatillo</h2>
+        <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" class="modal-img">
+        <p><strong>Estado:</strong>NO en peligro.</p>
+        Familia:LAURACEAE
+        <br></br>
+        Nombre Científico:Nectandra membranácea.
+    </div>
+</div>
+    <!-- Continuar con los demás modales... -->
+
+    <footer>
+        <p>&copy; 2025 Linked Leaves CR. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "flex";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+
+        function filterGallery() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const images = document.querySelectorAll('.gallery img');
+
+            images.forEach(img => {
+                const imgName = img.alt.toLowerCase();
+                const imgStatus = img.getAttribute('data-status');
+
+                if ((imgName.includes(searchInput) || searchInput === '') &&
+                    (imgStatus.includes(statusFilter) || statusFilter === '')) {
+                    img.style.display = 'block';
+                } else {
+                    img.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
