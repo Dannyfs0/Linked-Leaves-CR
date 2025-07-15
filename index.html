@@ -412,7 +412,7 @@
             <img src="imagenes/Mango.jpg" alt="Mango">
         </div>
         <div class="image-container" onclick="openModal('modal62')" data-status="No en peligro">
-            <img src="imagenes/Aguacate.JPG" alt="aguacate">
+            <img src="imagenes/Aguacate.JPG" alt="Aguacate">
         </div>
         <div class="image-container" onclick="openModal('modal63')" data-status="No en peligro">
             <img src="imagenes/Balsa.jpg" alt="Balsa">
@@ -726,7 +726,8 @@
         Nombre Científico:Myroxylon balsamum.
     </div>
 </div>
-<div id="modal25" class="modal"> <div class="modal-content">
+<div id="modal25" class="modal">
+    <div class="modal-content">
         <span class="close" onclick="closeModal('modal25')">&times;</span>
         <h2>Guarumo</h2>
         <img src="imagenes/Guarumo.jpg" alt="Guarumo" class="modal-img">
@@ -1190,15 +1191,15 @@
             const imageContainers = document.querySelectorAll('.gallery .image-container');
 
             imageContainers.forEach(container => {
-                const img = container.querySelector('img');
+                const img = container.querySelector('img'); 
                 const imgName = img.alt.toLowerCase();
-                const imgStatus = container.getAttribute('data-status');
+                const imgStatus = container.getAttribute('data-status'); 
 
                 if ((imgName.includes(searchInput) || searchInput === '') &&
                     (imgStatus.includes(statusFilter) || statusFilter === '')) {
-                    container.style.display = 'block';
+                    container.style.display = 'block'; 
                 } else {
-                    container.style.display = 'none';
+                    container.style.display = 'none'; 
                 }
             });
         }
