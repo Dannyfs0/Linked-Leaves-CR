@@ -18,13 +18,13 @@
                 background-color: #046e50;
                 color: #fff;
                 padding: 20px 0;
-                position: relative; /* Added for logo positioning */
+                position: relative;
             }
 
             h1 {
                 margin: 0;
                 font-size: 2.5em;
-                padding-right: 130px; /* Adjust based on logo width to prevent overlap */
+                padding-right: 130px;
             }
 
             .gallery {
@@ -37,13 +37,13 @@
             }
 
             .gallery img {
-                width: 200px; /* Default for larger screens */
-                height: 150px; /* Default for larger screens */
+                width: 200px;
+                height: 150px;
                 margin: 10px;
                 border-radius: 10px;
                 cursor: pointer;
                 transition: transform 0.3s ease;
-                object-fit: cover; /* Ensures images fill their box without distortion */
+                object-fit: cover;
             }
 
             .gallery img:hover {
@@ -70,7 +70,7 @@
                 max-width: 500px;
                 text-align: left;
                 font-weight: bold;
-                box-sizing: border-box; /* Include padding in the width calculation */
+                box-sizing: border-box;
             }
 
             .modal-content h2 {
@@ -89,7 +89,6 @@
                 padding: 10px 0;
                 text-align: center;
                 width: 100%;
-                /* Remove position: relative; bottom: 0; here, let flexbox handle it */
                 z-index: 1000;
             }
 
@@ -156,41 +155,57 @@
     .modal-content {
         width: 90%;
         max-width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .gallery img {
-        width: 100% !important; /* Make images take full width on small screens */
-        height: auto !important; /* Adjust height proportionally */
-        margin: 5px 0;
+        max-height: 80vh; 
+        overflow-y: auto; 
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+        font-weight: bold;
+        box-sizing: border-box;
     }
 
     .gallery {
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 5px;
         padding: 10px;
         margin-bottom: 20px;
     }
 
-    footer {
-        position: static; /* Ensure footer behaves normally with flexbox */
+    .image-container {
+        width: 100%;
+        height: 120px; 
+        overflow: hidden;
+        border-radius: 10px;
     }
 
-    /* Logo specific styles for mobile */
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        margin: 0;
+    }
+
+    footer {
+        position: static;
+    }
+
     .header-logo {
-        position: static !important; /* Remove absolute positioning */
-        width: 80px !important; /* Adjust logo size */
-        margin: 0 auto 10px; /* Center and add some space */
-        display: block; /* Ensure it takes its own line */
+        position: static !important;
+        width: 80px !important;
+        margin: 0 auto 10px;
+        display: block;
     }
 
     header {
-        padding-top: 10px; /* Adjust header padding to make space for logo */
+        padding-top: 10px;
         padding-bottom: 10px;
     }
 
     h1 {
-        font-size: 1.8em; /* Adjust title size */
-        padding-right: 0; /* Remove padding if logo is no longer on the right */
+        font-size: 1.8em;
+        padding-right: 0;
         text-align: center;
     }
 }
@@ -216,70 +231,70 @@
     </div>
 
     <div class="gallery">
-    <img src="imagenes/Amyris magnifolia.jpg" alt="Amyris magnifolia" onclick="openModal('modal1')" data-status="Vulnerable">
-    <img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo negro - Cascarillo" onclick="openModal('modal2')" data-status="En peligro">
-    <img src="imagenes/Ron-ron.jpg" alt="Ron-ron" onclick="openModal('modal3')" data-status="En peligro">
-    <img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" onclick="openModal('modal4')" data-status="Vulnerable">
-    <img src="imagenes/Escobo, Cascarillo.jpg" alt="Escobo, Cascarillo" onclick="openModal('modal5')" data-status="En peligro">
-    <img src="imagenes/Cascarillo.jpg" alt="Cascarillo" onclick="openModal('modal6')" data-status="Vulnerable">
-    <img src="imagenes/Níspero.jpg" alt="Níspero" onclick="openModal('modal7')" data-status="Vulnerable">
-    <img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo barrigón" onclick="openModal('modal8')" data-status="No en peligro">
-    <img src="imagenes/Ajo.jpg" alt="Ajo" onclick="openModal('modal9')" data-status="En peligro">
-    <img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" onclick="openModal('modal10')" data-status="En peligro">
-    <img src="imagenes/Cedro amargo.jpg" alt="Cedro amargo" onclick="openModal('modal11')" data-status="Vulnerable">
-    <img src="imagenes/Ceiba.jpg" alt="Ceiba" onclick="openModal('modal12')" data-status="No en peligro">
-    <img src="imagenes/Camibar.jpg" alt="Camibar" onclick="openModal('modal13')" data-status="En peligro">
-    <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo hediondo - Buriyon" onclick="openModal('modal14')" data-status="Vulnerable">
-    <img src="imagenes/Matasano.jpg" alt="Matasano" onclick="openModal('modal15')" data-status="En peligro">
-    <img src="imagenes/Guapinol negro.jpg" alt="Guapinol negro" onclick="openModal('modal16')" data-status="No en peligro">
-    <img src="imagenes/Carey.jpg" alt="Carey" onclick="openModal('modal17')" data-status="Vulnerable">
-    <img src="imagenes/Corteza amarillo.jpeg" alt="Tall Corteza amarillo tree with bright yellow-green leaves standing against a blue sky with scattered clouds, conveying a calm and vibrant natural environment" onclick="openModal('modal18')" data-status="Vulnerable">
-    <img src="imagenes/Naranjillo.jpg" alt="Naranjillo" onclick="openModal('modal19')" data-status="Vulnerable">
-    <img src="imagenes/Chiricano alegre.jpg" alt="Chiricano alegre" onclick="openModal('modal20')" data-status="Vulnerable">
-    <img src="imagenes/Guaba.jpeg" alt="Guaba" onclick="openModal('modal21')" data-status="En peligro">
-    <img src="imagenes/Manu.jpeg" alt="Manu" onclick="openModal('modal22')" data-status="En peligro">
-    <img src="imagenes/Mangle nato.jpeg" alt="Mangle nato" onclick="openModal('modal23')" data-status="Vulnerable">
-    <img src="imagenes/Sandalo.jpg" alt="Sándalo" onclick="openModal('modal24')" data-status="En peligro">
-    <img src="imagenes/Guarumo.jpg" alt="Guarumo" onclick="openModal('modal25')" data-status="No en peligro">
-    <img src="imagenes/Ocotea.jpg" alt="Ocotea" onclick="openModal('modal26')" data-status="No en peligro">
-    <img src="imagenes/Gavilán.jpg" alt="Gavilán" onclick="openModal('modal27')" data-status="En peligro">
-    <img src="imagenes/Sangrillo.jpg" alt="Sangrillo" onclick="openModal('modal28')" data-status="En peligro">
-    <img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" onclick="openModal('modal29')" data-status="En peligro">
-    <img src="imagenes/Cachimbo.jpg" alt="Cachimbo" onclick="openModal('modal30')" data-status="En peligro">
-    <img src="imagenes/Pinillo.jpeg" alt="Pinillo" onclick="openModal('modal31')" data-status="En peligro">
-    <img src="imagenes/Cativo.jpeg" alt="Cativo" onclick="openModal('modal32')" data-status="En peligro">
-    <img src="imagenes/Iguano.jpg" alt="Iguano" onclick="openModal('modal33')" data-status="Sin datos específicos">
-    <img src="imagenes/Guachipelín.jpg" alt="Guachipelín" onclick="openModal('modal34')" data-status="Sin datos específicos">
-    <img src="imagenes/Cedro caracolito.jpg" alt="Cedro caracolito" onclick="openModal('modal35')" data-status="Sin datos específicos">
-    <img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" onclick="openModal('modal36')" data-status="En peligro">
-    <img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal37')" data-status="No en peligro">
-    <img src="imagenes/nazareno.jpg" alt="nazareno" onclick="openModal('modal38')" data-status="En peligro">
-    <img src="imagenes/Hule.jpg" alt="Hule" onclick="openModal('modal39')" data-status="No en peligro">
-    <img src="imagenes/cacao.png" alt="cacao" onclick="openModal('modal40')" data-status="No en peligro">
-    <img src="imagenes/Níspero zapote.jpg" alt="Níspero zapote" onclick="openModal('modal41')" data-status="Sin datos específicos">
-    <img src="imagenes/bongo.jpeg" alt="bongo" onclick="openModal('modal42')" data-status="Sin datos específicos">
-    <img src="imagenes/Fruta dorada.jpg" alt="Fruta dorada" onclick="openModal('modal43')" data-status="No en peligro">
-    <img src="imagenes/Guácimo.jpg" alt="Guácimo" onclick="openModal('modal44')" data-status="No en peligro">
-    <img src="imagenes/Chilamate.jpg" alt="Chilamate" onclick="openModal('modal45')" data-status="No en peligro">
-    <img src="imagenes/Ojoche.jpg" alt="Ojoche" onclick="openModal('modal46')" data-status="No en peligro">
-    <img src="imagenes/Manú plátano.jpeg" alt="Manú plátano" onclick="openModal('modal47')" data-status="No en peligro">
-    <img src="imagenes/Árbol jicaro.jpeg" alt="Árbol jicaro" onclick="openModal('modal48')" data-status="No en peligro">
-    <img src="imagenes/Nance.jpg" alt="Nance" onclick="openModal('modal49')" data-status="No en peligro">
-    <img src="imagenes/Caimito.jpg" alt="Caimito" onclick="openModal('modal50')" data-status="No en peligro">
-    <img src="imagenes/Guayabón.jpg" alt="Guayabón" onclick="openModal('modal51')" data-status="No en peligro">
-    <img src="imagenes/Jobo negro.jpg" alt="Jobo negro" onclick="openModal('modal52')" data-status="No en peligro">
-    <img src="imagenes/pejibaye.jpeg" alt="pejibaye" onclick="openModal('modal53')" data-status="No en peligro">
-    <img src="imagenes/Zapotillo.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal54')" data-status="Sin datos específicos">
-    <img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" onclick="openModal('modal55')" data-status="Sin datos específicos">
-    <img src="imagenes/Guanábana.jpeg" alt="Guanábana" onclick="openModal('modal56')" data-status="No en peligro">
-    <img src="imagenes/biribá.jpg" alt="biribá" onclick="openModal('modal57')" data-status="No en peligro">
-    <img src="imagenes/Anonillo.jpg" alt="Anonillo" onclick="openModal('modal58')" data-status="Sin datos específicos">
-    <img src="imagenes/Guayaba.jpg" alt="Guayaba" onclick="openModal('modal59')" data-status="No en peligro">
-    <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" onclick="openModal('modal60')" data-status="No en peligro">
-    <img src="imagenes/Mango.jpg" alt="Mango" class="modal-img">
-    <img src="imagenes/Aguacate.JPG" alt="aguacate" onclick="openModal('modal62')" data-status="No en peligro">
-    <img src="imagenes/Balsa.jpg" alt="Balsa" onclick="openModal('modal63')" data-status="No en peligro">
-    <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" onclick="openModal('modal64')" data-status="No en peligro">
+    <div class="image-container"><img src="imagenes/Amyris magnifolia.jpg" alt="Amyris magnifolia" onclick="openModal('modal1')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo negro - Cascarillo" onclick="openModal('modal2')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Ron-ron.jpg" alt="Ron-ron" onclick="openModal('modal3')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" onclick="openModal('modal4')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Escobo, Cascarillo.jpg" alt="Escobo, Cascarillo" onclick="openModal('modal5')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Cascarillo.jpg" alt="Cascarillo" onclick="openModal('modal6')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Níspero.jpg" alt="Níspero" onclick="openModal('modal7')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo barrigón" onclick="openModal('modal8')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Ajo.jpg" alt="Ajo" onclick="openModal('modal9')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" onclick="openModal('modal10')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Cedro amargo.jpg" alt="Cedro amargo" onclick="openModal('modal11')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Ceiba.jpg" alt="Ceiba" onclick="openModal('modal12')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Camibar.jpg" alt="Camibar" onclick="openModal('modal13')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo hediondo - Buriyon" onclick="openModal('modal14')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Matasano.jpg" alt="Matasano" onclick="openModal('modal15')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Guapinol negro.jpg" alt="Guapinol negro" onclick="openModal('modal16')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Carey.jpg" alt="Carey" onclick="openModal('modal17')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Corteza amarillo.jpeg" alt="Tall Corteza amarillo tree with bright yellow-green leaves standing against a blue sky with scattered clouds, conveying a calm and vibrant natural environment" onclick="openModal('modal18')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Naranjillo.jpg" alt="Naranjillo" onclick="openModal('modal19')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Chiricano alegre.jpg" alt="Chiricano alegre" onclick="openModal('modal20')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Guaba.jpeg" alt="Guaba" onclick="openModal('modal21')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Manu.jpeg" alt="Manu" onclick="openModal('modal22')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Mangle nato.jpeg" alt="Mangle nato" onclick="openModal('modal23')" data-status="Vulnerable"></div>
+    <div class="image-container"><img src="imagenes/Sandalo.jpg" alt="Sándalo" onclick="openModal('modal24')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Guarumo.jpg" alt="Guarumo" onclick="openModal('modal25')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Ocotea.jpg" alt="Ocotea" onclick="openModal('modal26')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Gavilán.jpg" alt="Gavilán" onclick="openModal('modal27')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Sangrillo.jpg" alt="Sangrillo" onclick="openModal('modal28')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" onclick="openModal('modal29')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Cachimbo.jpg" alt="Cachimbo" onclick="openModal('modal30')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Pinillo.jpeg" alt="Pinillo" onclick="openModal('modal31')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Cativo.jpeg" alt="Cativo" onclick="openModal('modal32')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Iguano.jpg" alt="Iguano" onclick="openModal('modal33')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Guachipelín.jpg" alt="Guachipelín" onclick="openModal('modal34')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Cedro caracolito.jpg" alt="Cedro caracolito" onclick="openModal('modal35')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" onclick="openModal('modal36')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal37')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/nazareno.jpg" alt="nazareno" onclick="openModal('modal38')" data-status="En peligro"></div>
+    <div class="image-container"><img src="imagenes/Hule.jpg" alt="Hule" onclick="openModal('modal39')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/cacao.png" alt="cacao" onclick="openModal('modal40')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Níspero zapote.jpg" alt="Níspero zapote" onclick="openModal('modal41')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/bongo.jpeg" alt="bongo" onclick="openModal('modal42')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Fruta dorada.jpg" alt="Fruta dorada" onclick="openModal('modal43')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Guácimo.jpg" alt="Guácimo" onclick="openModal('modal44')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Chilamate.jpg" alt="Chilamate" onclick="openModal('modal45')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Ojoche.jpg" alt="Ojoche" onclick="openModal('modal46')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Manú plátano.jpeg" alt="Manú plátano" onclick="openModal('modal47')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Árbol jicaro.jpeg" alt="Árbol jicaro" onclick="openModal('modal48')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Nance.jpg" alt="Nance" onclick="openModal('modal49')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Caimito.jpg" alt="Caimito" onclick="openModal('modal50')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Guayabón.jpg" alt="Guayabón" onclick="openModal('modal51')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Jobo negro.jpg" alt="Jobo negro" onclick="openModal('modal52')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/pejibaye.jpeg" alt="pejibaye" onclick="openModal('modal53')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Zapotillo.jpg" alt="Tamarindo - Almendro" onclick="openModal('modal54')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" onclick="openModal('modal55')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Guanábana.jpeg" alt="Guanábana" onclick="openModal('modal56')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/biribá.jpg" alt="biribá" onclick="openModal('modal57')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Anonillo.jpg" alt="Anonillo" onclick="openModal('modal58')" data-status="Sin datos específicos"></div>
+    <div class="image-container"><img src="imagenes/Guayaba.jpg" alt="Guayaba" onclick="openModal('modal59')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" onclick="openModal('modal60')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Mango.jpg" alt="Mango" class="modal-img"></div>
+    <div class="image-container"><img src="imagenes/Aguacate.JPG" alt="Aguacate" onclick="openModal('modal62')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Balsa.jpg" alt="Balsa" onclick="openModal('modal63')" data-status="No en peligro"></div>
+    <div class="image-container"><img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" onclick="openModal('modal64')" data-status="No en peligro"></div>
 </div>
 </div>
 <div id="modal1" class="modal">
@@ -453,7 +468,7 @@
 
 <div id="modal14" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal14')">&times;</span>
+        <span class="close" onclick="closeModal('modal14')">&times;</h2>
         <h2>Copo Hediondo - Buriyon</h2>
         <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo hediondo - Buriyon" class="modal-img">
         <p><strong>Estado:</strong>Vulnerable.</p>
@@ -554,7 +569,7 @@
 
 <div id="modal22" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal22')">&times;</span>
+        <span class="close" onclick="closeModal('modal22')">&times;</h2>
         <h2>Manu</h2>
         <img src="imagenes/Manu.jpeg" alt="Manu" class="modal-img">
         <p><strong>Estado:</strong> En peligro.</p>
@@ -581,9 +596,9 @@
         <h2>Sándalo</h2>
         <img src="imagenes/Sandalo.jpg" alt="Sándalo" class="modal-img">
         <p><strong>Estado:</strong>En peligro.</p>
-        Familia:Urticaceae.
+        Familia:FABACEAE.
         <br></br>
-        Nombre Científico:Cecropia obtusifolia.
+        Nombre Científico:Myroxylon balsamum.
     </div>
 </div>
 <div id="modal25" class="modal">
@@ -592,9 +607,9 @@
         <h2>Guarumo</h2>
         <img src="imagenes/Guarumo.jpg" alt="Guarumo" class="modal-img">
         <p><strong>Estado:</strong>No en peligro.</p>
-        Familia:LAURACEAE.
+        Familia:Urticaceae.
         <br></br>
-        Nombre Científico:Nectandra hypoleuca.
+        Nombre Científico:Cecropia obtusifolia.
     </div>
 </div>
 <div id="modal26" class="modal">
@@ -775,7 +790,7 @@
 </div>
 <div id="modal42" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal42')">&times;</span>
+        <span class="close" onclick="closeModal('modal42')">&times;</h2>
         <h2>Bongo</h2>
         <img src="imagenes/bongo.jpeg" alt="bongo" class="modal-img">
         <p><strong>Estado:</strong>Sin datos específicos.</p>
