@@ -27,9 +27,9 @@
 
             .gallery {
                 flex: 1;
-                display: grid; /* Cambiado a Grid para un layout responsivo */
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 3 columnas adaptativas */
-                gap: 20px; /* Espacio entre los elementos de la galería */
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
                 justify-content: center;
                 padding: 20px;
                 margin-bottom: 60px;
@@ -37,8 +37,8 @@
 
             .image-container {
                 position: relative;
-                width: 100%; /* Asegura que el contenedor ocupe el espacio del grid */
-                padding-bottom: 75%; /* Proporción 4:3 (altura 75% del ancho) */
+                width: 100%;
+                padding-bottom: 75%;
                 overflow: hidden;
                 border-radius: 10px;
                 cursor: pointer;
@@ -51,12 +51,12 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* Cubre el área manteniendo la relación de aspecto */
+                object-fit: cover;
                 border-radius: 10px;
             }
 
             .image-container:hover {
-                transform: scale(1.05); /* Ligeramente más pequeño para un efecto más sutil */
+                transform: scale(1.05);
             }
 
             .modal {
@@ -77,10 +77,9 @@
                 padding: 20px;
                 border-radius: 10px;
                 max-width: 500px;
-                width: 90%; /* Ajuste para móviles, se aplica por defecto ahora */
-                max-height: 90vh; /* Ajuste para móviles, se aplica por defecto ahora */
-                overflow-y: auto; /* Ajuste para móviles, se aplica por defecto ahora */
-                text-align: left;
+                width: 90%;
+                max-height: 90vh;
+                overflow-y: auto;
                 font-weight: bold;
             }
 
@@ -106,10 +105,10 @@
             }
 
             .modal-img {
-                width: 100%; /* La imagen del modal ocupará el 100% del ancho de su contenedor */
-                max-width: 470px; /* Limita el tamaño máximo en pantallas grandes */
-                height: auto; /* Altura automática para mantener la proporción */
-                max-height: 390px; /* Limita la altura máxima para evitar imágenes muy altas */
+                width: 100%;
+                max-width: 470px;
+                height: auto;
+                max-height: 390px;
                 object-fit: cover;
                 border-radius: 10px;
                 display: block;
@@ -166,35 +165,35 @@
 
             @media screen and (max-width: 768px) {
                 .gallery {
-                    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 2 columnas en tablets */
+                    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                     gap: 15px;
                 }
             }
 
             @media screen and (max-width: 600px) {
                 .gallery {
-                    grid-template-columns: 1fr; /* 1 columna en móviles */
+                    grid-template-columns: 1fr;
                     padding: 10px;
                     margin-bottom: 20px;
                 }
 
                 .image-container {
-                    padding-bottom: 60%; /* Ajuste de proporción para móviles */
+                    padding-bottom: 60%;
                 }
 
                 .modal-content {
-                    width: 95%; /* Mayor ancho en móviles */
+                    width: 95%;
                     padding: 15px;
                 }
 
                 .modal-img {
-                    max-width: 100%; /* Asegura que la imagen no desborde en móviles */
-                    max-height: 250px; /* Reduce la altura máxima de la imagen del modal en móviles */
+                    max-width: 100%;
+                    max-height: 250px;
                 }
 
                 footer {
                     position: static;
-                    font-size: 0.8em; /* Tamaño de fuente más pequeño para el footer en móviles */
+                    font-size: 0.8em;
                 }
 
                 #filterBar input[type="text"],
@@ -727,7 +726,7 @@
         Nombre Científico:Myroxylon balsamum.
     </div>
 </div>
-<div class="modal-content">
+<div id="modal25" class="modal"> <div class="modal-content">
         <span class="close" onclick="closeModal('modal25')">&times;</span>
         <h2>Guarumo</h2>
         <img src="imagenes/Guarumo.jpg" alt="Guarumo" class="modal-img">
@@ -936,7 +935,7 @@
     </div>
 </div>
 <div id="modal44" class="modal">
-    <div class="modal-content"> 
+    <div class="modal-content">
         <span class="close" onclick="closeModal('modal44')">&times;</span>
         <h2>Guácimo</h2>
         <img src="imagenes/Guácimo.jpg" alt="Guácimo" class="modal-img">
@@ -1135,7 +1134,7 @@
 </div>
 <div id="modal62" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal47')">&times;</span>
+        <span class="close" onclick="closeModal('modal62')">&times;</span>
         <h2>Aguacate</h2>
         <img src="imagenes/Aguacate.JPG" alt="Aguacate" class="modal-img">
         <p><strong>Estado:</strong>NO en peligro.</p>
@@ -1157,7 +1156,7 @@
 </div>
 <div id="modal64" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal('modal47')">&times;</span>
+        <span class="close" onclick="closeModal('modal64')">&times;</span>
         <h2>Aguacatillo</h2>
         <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" class="modal-img">
         <p><strong>Estado:</strong>NO en peligro.</p>
@@ -1188,19 +1187,18 @@
         function filterGallery() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             const statusFilter = document.getElementById('statusFilter').value;
-            // Selecciona los contenedores de las imágenes, no las imágenes directamente
             const imageContainers = document.querySelectorAll('.gallery .image-container');
 
             imageContainers.forEach(container => {
-                const img = container.querySelector('img'); // Encuentra la imagen dentro del contenedor
+                const img = container.querySelector('img');
                 const imgName = img.alt.toLowerCase();
-                const imgStatus = container.getAttribute('data-status'); // data-status está en el contenedor
+                const imgStatus = container.getAttribute('data-status');
 
                 if ((imgName.includes(searchInput) || searchInput === '') &&
                     (imgStatus.includes(statusFilter) || statusFilter === '')) {
-                    container.style.display = 'block'; // Muestra el contenedor
+                    container.style.display = 'block';
                 } else {
-                    container.style.display = 'none'; // Oculta el contenedor
+                    container.style.display = 'none';
                 }
             });
         }
