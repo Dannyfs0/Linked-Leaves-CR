@@ -17,7 +17,7 @@
             header {
                 background-color: #046e50;
                 color: #fff;
-                padding: 20px; /* Ajuste del padding */
+                padding: 20px; /* Ajuste del padding general */
                 display: flex; /* Usamos flexbox para alinear elementos */
                 justify-content: center; /* Centrar el contenido del header */
                 align-items: center; /* Centrar verticalmente */
@@ -189,19 +189,26 @@
             }
 
             @media screen and (max-width: 600px) {
+                header {
+                    padding-top: 40px; /* Aumenta el padding superior del header en móviles */
+                    padding-bottom: 20px; /* Mantén un padding inferior */
+                }
+
                 .header-content {
                     flex-direction: column; /* Apila el logo y el texto verticalmente */
                     text-align: center;
-                    gap: 10px;
+                    gap: 15px; /* Ajusta el espacio entre elementos apilados */
+                    justify-content: center; /* Centra el contenido del flexbox */
+                    align-items: center; /* Alinea los elementos al centro horizontalmente */
                 }
                 .header-logo {
-                    width: 100px; /* Logo ligeramente más pequeño en móviles */
+                    width: 90px; /* Un poco más pequeño el logo en móviles */
                 }
                 header h1 {
-                    font-size: 2em; /* Título más pequeño */
+                    font-size: 1.8em; /* Título más pequeño */
                 }
                 header p {
-                    font-size: 0.9em;
+                    font-size: 0.8em; /* Descripción más pequeña */
                 }
                 .gallery {
                     grid-template-columns: 1fr;
@@ -423,7 +430,7 @@
         <div class="image-container" onclick="openModal('modal54')" data-status="Sin datos específicos">
             <img src="imagenes/Zapotillo.jpg" alt="Tamarindo - Almendro">
         </div>
-        <div class="image-container" onclick="openModal('modal55')" data-status="Sin datos específicos">
+        <div class="image-container" onclick="openModal('modal55')" data-status="No en peligro">
             <img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río">
         </div>
         <div class="image-container" onclick="openModal('modal56')" data-status="No en peligro">
@@ -1228,6 +1235,7 @@
                 const imgName = img.alt.toLowerCase();
                 const imgStatus = container.getAttribute('data-status'); 
 
+                // Mostrar o ocultar el contenedor de la imagen
                 if ((imgName.includes(searchInput) || searchInput === '') &&
                     (imgStatus.includes(statusFilter) || statusFilter === '')) {
                     container.style.display = 'block'; 
