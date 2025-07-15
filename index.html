@@ -18,11 +18,13 @@
                 background-color: #046e50;
                 color: #fff;
                 padding: 20px 0;
+                position: relative; /* Added for logo positioning */
             }
 
             h1 {
                 margin: 0;
                 font-size: 2.5em;
+                padding-right: 130px; /* Adjust based on logo width to prevent overlap */
             }
 
             .gallery {
@@ -35,13 +37,13 @@
             }
 
             .gallery img {
-                width: 200px;
-                height: 150px;
+                width: 200px; /* Default for larger screens */
+                height: 150px; /* Default for larger screens */
                 margin: 10px;
                 border-radius: 10px;
                 cursor: pointer;
                 transition: transform 0.3s ease;
-                object-fit: cover;
+                object-fit: cover; /* Ensures images fill their box without distortion */
             }
 
             .gallery img:hover {
@@ -68,6 +70,7 @@
                 max-width: 500px;
                 text-align: left;
                 font-weight: bold;
+                box-sizing: border-box; /* Include padding in the width calculation */
             }
 
             .modal-content h2 {
@@ -86,8 +89,7 @@
                 padding: 10px 0;
                 text-align: center;
                 width: 100%;
-                position: relative;
-                bottom: 0;
+                /* Remove position: relative; bottom: 0; here, let flexbox handle it */
                 z-index: 1000;
             }
 
@@ -149,38 +151,55 @@
                 font-style: italic;
             }
 
+/* Mobile-specific styles */
 @media screen and (max-width: 600px) {
-.modal-content {
-    width: 90%;
-    max-width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-}
+    .modal-content {
+        width: 90%;
+        max-width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
 
-.gallery img {
-    width: 100% !important;
-    height: auto !important;
-    margin: 5px 0;
-}
+    .gallery img {
+        width: 100% !important; /* Make images take full width on small screens */
+        height: auto !important; /* Adjust height proportionally */
+        margin: 5px 0;
+    }
 
-.gallery {
-    padding: 10px;
-    margin-bottom: 20px;
-}
+    .gallery {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
 
-footer {
-    position: static;
-}
+    footer {
+        position: static; /* Ensure footer behaves normally with flexbox */
+    }
+
+    /* Logo specific styles for mobile */
+    .header-logo {
+        position: static !important; /* Remove absolute positioning */
+        width: 80px !important; /* Adjust logo size */
+        margin: 0 auto 10px; /* Center and add some space */
+        display: block; /* Ensure it takes its own line */
+    }
+
+    header {
+        padding-top: 10px; /* Adjust header padding to make space for logo */
+        padding-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em; /* Adjust title size */
+        padding-right: 0; /* Remove padding if logo is no longer on the right */
+        text-align: center;
+    }
 }
 
         </style>
     </head>
 <body>
-    <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
-        <img src="imagenes/logo.jpg" alt="Logo de Linked Leaves" style="width: 120px; height: auto;">
-    </div>
-
     <header>
+        <img src="imagenes/logo.jpg" alt="Logo de Linked Leaves" class="header-logo" style="width: 120px; height: auto; position: absolute; top: 10px; right: 10px; z-index: 1000;">
         <h1><em>Linked Leaves CR</em></h1>
         <p><em>Descubre los árboles de la Peninsula de Osa</em></p>
     </header>
@@ -257,7 +276,7 @@ footer {
     <img src="imagenes/Anonillo.jpg" alt="Anonillo" onclick="openModal('modal58')" data-status="Sin datos específicos">
     <img src="imagenes/Guayaba.jpg" alt="Guayaba" onclick="openModal('modal59')" data-status="No en peligro">
     <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" onclick="openModal('modal60')" data-status="No en peligro">
-    <img src="imagenes/Mango.jpg" alt="Mango" onclick="openModal('modal61')" data-status="No en peligro">
+    <img src="imagenes/Mango.jpg" alt="Mango" class="modal-img">
     <img src="imagenes/Aguacate.JPG" alt="aguacate" onclick="openModal('modal62')" data-status="No en peligro">
     <img src="imagenes/Balsa.jpg" alt="Balsa" onclick="openModal('modal63')" data-status="No en peligro">
     <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" onclick="openModal('modal64')" data-status="No en peligro">
@@ -284,7 +303,7 @@ footer {
         <p><strong>Estado:</strong>En peligro.</p>
         <p> Familia:CARYOCARACEAE.
             <br></br>
-            Nombre  Científico:Anthodiscus chocoensis.
+            Nombre Científico:Anthodiscus chocoensis.
     </div>
 </div>
 
@@ -777,7 +796,7 @@ footer {
     </div>
 </div>
 <div id="modal44" class="modal">
-    <div class="modal-content"> 
+    <div class="modal-content">
         <span class="close" onclick="closeModal('modal44')">&times;</span>
         <h2>Guácimo</h2>
         <img src="imagenes/Guácimo.jpg" alt="Guácimo" class="modal-img">
@@ -1007,8 +1026,6 @@ footer {
         Nombre Científico:Nectandra membranácea.
     </div>
 </div>
-    <!-- Continuar con los demás modales... -->
-
     <footer>
         <p>&copy; 2025 Linked Leaves CR. Todos los derechos reservados.</p>
     </footer>
