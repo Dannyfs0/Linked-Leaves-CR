@@ -149,19 +149,30 @@
                 font-style: italic;
             }
 
-            @media screen and (max-width: 600px) {
-                .modal-content {
-                    width: 90%;
-                    max-width: 90%;
-                }
+@media screen and (max-width: 600px) {
+.modal-content {
+    width: 90%;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
 
-                .tree-item img,
-                .modal-img,
-                .gallery img {
-                    width: 90%;
-                    height: auto;
-                }
-            }
+.gallery img {
+    width: 100% !important;
+    height: auto !important;
+    margin: 5px 0;
+}
+
+.gallery {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+footer {
+    position: static;
+}
+}
+
         </style>
     </head>
 <body>
