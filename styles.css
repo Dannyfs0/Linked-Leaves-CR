@@ -1,102 +1,98 @@
+/* Base Styles for HTML and Body */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Ensures padding and borders are included in the element's total width/height */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Asumo Roboto o similar, puedes cambiarlo */
     background-color: #f4f4f4;
     color: #000000;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el footer se quede abajo */
-    font-style: italic; /* CAMBIO: Aplica cursiva a todo el texto por defecto */
+    min-height: 100vh; /* Ensures the footer stays at the bottom */
+    /* font-style: italic;  Si quieres que todo el texto sea cursiva por defecto, descomenta esto */
 }
 
+/* Header Section */
 header {
-    background-color: #2e7d32; /* Fondo verde oscuro para el header */
-    color: white; /* Asegura que el texto dentro del header sea blanco */
-    padding: 1rem 0; /* Un poco de padding arriba y abajo */
+    background-color: #2e7d32; /* Dark green background */
+    color: white; /* Ensures text within the header is white */
+    padding: 1rem 0; /* Padding top and bottom */
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; /* Apila el logo/título y la descripción */
-    align-items: center; /* Centra horizontalmente el contenido */
+    flex-direction: column; /* Stacks logo/title and description */
+    align-items: center; /* Centers content horizontally */
 }
 
 .header-content {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Espacio entre el logo/título y la descripción */
+    justify-content: center; /* Centers content horizontally */
+    gap: 15px; /* Space between logo and text */
+    margin-bottom: 10px; /* Space between logo/title and description */
 }
 
 .header-logo {
-    height: 80px;
-    margin-right: 15px;
-    border-radius: 50%;
-    object-fit: cover;
+    height: 80px; /* Logo size */
+    width: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Makes the logo circular */
+    object-fit: cover; /* Ensures the image is not distorted */
 }
 
 header h1 {
     margin: 0;
-    color: white; /* Asegura que el título sea blanco para contrastar con el fondo verde */
-    font-size: 2.5em;
-    white-space: nowrap;
-    text-align: center; /* Asegura que el texto esté centrado */
+    color: white; /* Ensures h1 is white */
+    font-size: 2.5rem; /* Increased main title size */
     font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Pequeña sombra para el texto */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 header p {
-    margin: 5px 0 0; /* Ajustado margen superior para estar cerca del título */
-    color: white; /* Asegura que el subtítulo sea blanco */
-    font-size: 1.1em;
-    font-style: italic; /* Mantiene la cursiva */
-    text-align: center; /* Centra el subtítulo también */
+    margin: 0;
+    font-size: 1em;
+    color: white; /* Ensures paragraph is white */
 }
 
-/* --- Navegación --- */
+/* Navigation Bar */
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 20px;
-    justify-content: center; /* Centra la navegación */
+    flex-wrap: wrap; /* Allows nav items to wrap on smaller screens */
+    justify-content: center; /* Center nav items when wrapped */
 }
 
 nav ul li a {
-    color: #fff;
-    background-color: #388e3c; /* Un verde ligeramente más claro para la navegación */
-    padding: 10px 20px;
+    color: white;
     text-decoration: none;
     font-weight: bold;
+    padding: 8px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-size: 1.1em;
-    font-style: italic; /* Mantiene la cursiva */
+    transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-    background-color: #c8e6c9; /* Un verde muy claro al pasar el ratón */
-    color: #2e7d32; /* Texto verde oscuro al pasar el ratón */
-    transform: translateY(-2px);
+    background-color: rgba(255,255,255,0.2);
 }
 
-/* --- Main Content --- */
+/* Main Content Area */
 main {
-    flex-grow: 1;
+    flex: 1; /* Allows main content to grow and push the footer down */
     padding: 20px;
-    max-width: 1400px; /* Aumentado el ancho máximo para aprovechar más espacio en pantallas grandes */
+    max-width: 1200px;
     margin: 20px auto;
-    background-color: #fff;
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Search and Filter Section */
 .search-filter {
     display: flex;
     justify-content: center;
@@ -105,272 +101,363 @@ main {
     flex-wrap: wrap;
 }
 
-#searchInput, #conservationFilter {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
+.search-filter input[type="text"],
+.search-filter select {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 1.1em;
-    width: 100%;
-    max-width: 300px;
-    font-style: italic; /* Mantiene la cursiva */
+    font-size: 1em;
+    flex: 1;
+    min-width: 200px;
+    box-sizing: border-box; /* Include padding/border in element's total width */
 }
 
+.search-filter select {
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Gallery Section (Tree Cards) */
 .gallery {
     display: grid;
-    gap: 25px;
-    justify-content: center;
-    /* CAMBIO: Valores predeterminados para una buena distribución en PC (3-5 columnas) */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* CLAVE PARA COLUMNAS EN PC: ajusta minmax(280px, 1fr) según el tamaño deseado de las tarjetas */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .tree-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #e8f5e9; /* Light green background for cards */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     overflow: hidden;
     text-align: center;
+    padding-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    padding-bottom: 15px;
     display: flex;
     flex-direction: column;
-    height: auto; /* Ajuste de altura automático para mejor responsividad */
+    justify-content: space-between; /* Pushes content and name/status apart */
 }
 
 .tree-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .tree-card img {
     width: 100%;
-    height: 200px !important; /* Altura fija para las imágenes de la tarjeta */
-    object-fit: cover;
-    display: block;
-    border-bottom: 1px solid #eee;
-    flex-shrink: 0;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Ensures images cover the area */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.tree-card h3 {
+    font-size: 1.5em;
+    color: #2e7d32;
+    margin: 0 10px 10px;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow content */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
 }
 
 .tree-card p {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 15px;
-    color: #000000; /* CAMBIO: Nombre del árbol en verde */
-    padding: 0 10px;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-style: normal; /* CAMBIO: El nombre del árbol no está en cursiva, para destacarlo */
+    font-size: 0.95em;
+    color: #555;
+    margin: 0 10px 5px;
 }
 
-/* --- Modales --- */
-.modal {
-    display: none; /* ¡MUY IMPORTANTE! Oculto por defecto por CSS. */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    /* La propiedad display: flex; se aplica por JavaScript cuando el modal se abre */
+.tree-card p strong {
+    color: #007bff; /* Blue for strong text in cards */
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 2% auto;
-    padding: 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 800px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    text-align: center;
-    animation: fadeIn 0.3s ease-out;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-height: 96vh;
-    overflow-y: auto;
-    font-style: italic; /* Mantiene la cursiva dentro del modal */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.close-button {
-    color: #aaa;
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    font-style: normal; /* El botón de cerrar no está en cursiva */
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #333;
-    text-decoration: none;
-}
-
-.modal-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 15px auto 20px auto;
-    border-radius: 8px;
-    max-height: 500px; /* Altura máxima para imágenes en el modal */
-    object-fit: contain; /* Ajusta la imagen dentro de los límites sin recortarla */
-}
-
-.modal-content h2 {
-    color: #000000;
-    margin-bottom: 15px;
-    font-size: 2.5em;
-    font-style: normal; /* El título del modal no está en cursiva */
-}
-
-.modal-content p {
-    font-size: 1.15em;
-    line-height: 1.65;
-    margin-bottom: 15px;
-    text-align: justify;
-    max-width: 750px;
-}
-
-.modal-content p strong {
-    color: #333;
-    font-style: normal; /* El texto resaltado no está en cursiva */
-}
-
-/* --- About Page Specific Styles --- */
+/* About Page Specific Styles */
 .about-content {
-    max-width: 800px;
-    margin: 40px auto;
     padding: 30px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     line-height: 1.8;
-    text-align: justify;
-    font-style: italic; /* Mantiene la cursiva en la página "Acerca de" */
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .about-content h2 {
     text-align: center;
-    color: #4CAF50;
-    margin-bottom: 25px;
+    color: #2e7d32;
     font-size: 2.2em;
-    font-style: normal; /* El título de "Acerca de" no está en cursiva */
+    margin-bottom: 25px;
 }
 
 .about-content p {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* More space between paragraphs */
     font-size: 1.15em;
 }
 
 .about-content strong {
-    color: #000000;
-    font-style: normal; /* El texto resaltado en "Acerca de" no está en cursiva */
+    color: #007bff; /* Distinct color for important text in "About" */
 }
 
-/* --- Footer --- */
+/* Footer */
 footer {
     width: 100%;
-    background-color: #333;
+    background-color: #2e7d32;
     color: white;
     text-align: center;
-    padding: 20px 0;
-    margin-top: auto;
+    padding: 1rem 0;
+    margin-top: auto; /* Pushes the footer to the bottom */
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     font-size: 0.9em;
-    font-style: italic; /* Mantiene la cursiva en el footer */
 }
 
-/* --- Responsive Design --- */
-/* Para pantallas pequeñas (móviles) */
+/* ******************************************* */
+/* ******** MODAL STYLES (RESPONSIVE & REFINED) ******** */
+/* ******************************************* */
+
+/* Modal Overlay */
+.modal {
+    display: none; /* Hidden by default; JavaScript will change to 'flex' to show it */
+    position: fixed; /* Fixed on the screen */
+    z-index: 1000; /* Ensures it's above all other content */
+    left: 0;
+    top: 0;
+    width: 100%; /* Covers full viewport width */
+    height: 100%; /* Covers full viewport height */
+    background-color: rgba(0,0,0,0.7); /* Semi-transparent dark background */
+    
+    /* Centers the modal content perfectly */
+    display: flex; /* JavaScript must set this to 'flex' when opening */
+    justify-content: center; /* Horizontally center modal-content */
+    align-items: center; /* Vertically center modal-content */
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* More pronounced shadow */
+    position: relative; /* Needed for close button positioning */
+    
+    /* Desktop First Properties */
+    width: 500px; /* Default width for PC. */
+    max-width: 90%; /* Safety net: ensures it's not wider than the screen even on PC */
+    
+    /* Crucial for responsive height and internal scrolling */
+    max-height: 90vh; /* Max 90% of the viewport height for PC */
+    overflow-y: auto; /* Allows vertical scrolling *within* modal content if it exceeds max-height */
+    box-sizing: border-box; /* Ensures padding and border don't increase total size */
+    
+    /* Entry animation (optional) */
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* When modal is active (JavaScript should add this class if you use animations) */
+/* If your JS doesn't add .active, you can remove this rule */
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Close Button (x) */
+.close-button {
+    color: #aaa;
+    font-size: 30px; /* Slightly larger size for better clickability */
+    font-weight: bold;
+    position: absolute;
+    top: 5px; /* Adjust top position */
+    right: 12px; /* Adjust right position */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+/* Internal Modal Content (for better control of text and images) */
+.modal-img { /* Use this class if your images inside modal have it, as per your HTML snippet */
+    max-width: 100%; /* Image will not overflow the modal */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes extra space below image */
+    margin: 0 auto 15px auto; /* Centers image and adds bottom space */
+    border-radius: 5px;
+}
+
+.modal-content h2 {
+    font-size: 2em; /* Font size for PC */
+    margin-top: 0;
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 1.1em; /* Font size for PC */
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* ******************************************* */
+/* ******** RESPONSIVE DESIGN (MEDIA QUERIES) ******** */
+/* ******************************************* */
+
+/* Styles for tablets and small desktops (max-width 768px) */
 @media (max-width: 768px) {
+    /* Header adjustments */
     header {
-        flex-direction: column;
+        flex-direction: column; /* Stack header content */
         text-align: center;
+        padding: 10px;
+    }
+    .header-content {
+        flex-direction: column; /* Stack logo and title */
+        gap: 5px;
+    }
+    .header-logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    header h1 {
+        font-size: 2rem;
     }
 
+    /* Navigation adjustments */
     nav ul {
-        flex-direction: column;
+        flex-direction: column; /* Stack nav buttons */
         gap: 10px;
         margin-top: 15px;
     }
-
     nav ul li a {
-        width: calc(100% - 40px);
+        width: calc(100% - 40px); /* Adjust button width */
         display: block;
         text-align: center;
         margin: 0 auto;
     }
 
-    .header-content {
+    /* Search/Filter adjustments */
+    .search-filter {
         flex-direction: column;
+        align-items: center;
+    }
+    .search-filter input[type="text"],
+    .search-filter select {
+        max-width: 90%;
+        margin-bottom: 10px; /* Add space between stacked elements */
     }
 
-    .header-logo {
-        margin-right: 0;
-        margin-bottom: 10px;
+    /* Main section adjustments */
+    main {
+        padding: 15px;
+        margin: 15px auto;
     }
-
-    #searchInput, #conservationFilter {
-        max-width: 100%;
+    .gallery {
+        grid-template-columns: 1fr; /* One column on smaller screens */
     }
-
-    .modal-content {
-        width: 95%;
-        padding: 20px;
-        margin: 5% auto;
-    }
-
-    .about-content {
-        margin: 20px auto;
-        padding: 20px;
-    }
-
     .tree-card {
         height: auto;
     }
-
-    .gallery {
-        grid-template-columns: 1fr; /* CAMBIO: Una columna en pantallas pequeñas */
+    .about-content {
+        margin: 15px auto;
+        padding: 20px;
     }
-}
 
-/* Para pantallas medianas (tabletas) y grandes (desktops) */
-@media (min-width: 769px) {
-    .gallery {
-        /* CAMBIO: Más columnas en pantallas más grandes (3 a 5 columnas) */
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
+    /* Modal adjustments for tablets */
     .modal-content {
-        padding: 15px;
-        width: 98%;
-        margin: 2% auto;
+        width: 85%; /* Occupies a good percentage of width on tablets */
+        max-width: 600px; /* Limits width even on larger tablets */
+        padding: 18px;
+        max-height: 85vh; /* Slight adjustment for tablet height */
     }
     .modal-content h2 {
-        font-size: 1.8em;
+        font-size: 1.8rem;
     }
     .modal-content p {
+        font-size: 1rem; /* Adjust text size for tablets */
+    }
+    .modal-img {
+        max-height: 350px; /* Adjust image height in modal for tablets */
+    }
+}
+
+/* Styles for phones (max-width 600px) */
+@media (max-width: 600px) {
+    /* Header adjustments */
+    header h1 {
+        font-size: 1.8em;
+    }
+    header p {
+        font-size: 0.9em;
+    }
+
+    /* Hero section adjustments (si tienes esta sección) */
+    .hero {
+        padding: 60px 10px;
+    }
+    .hero h2 {
+        font-size: 2em;
+    }
+    .hero p {
         font-size: 1em;
-        line-height: 1.5;
-        margin-bottom: 10px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    /* Main section adjustments */
+    main {
+        padding: 10px;
+        margin: 10px auto;
+    }
+    section h2 {
+        font-size: 1.8em;
+    }
+
+    /* Modal adjustments for phones */
+    .modal-content {
+        width: 95%; /* Occupies almost full width on small mobiles */
+        padding: 15px; /* Reduce padding for very small screens */
+        max-height: 80vh; /* **Crucial adjustment**: Ensures modal is not too tall on phone.
+                            You can further reduce this value (e.g., 75vh) if it still overflows. */
+        margin: 10px; /* Adds a small margin around the modal on mobiles if needed */
+    }
+    .modal-content h2 {
+        font-size: 1.6em; /* Reduce modal title size */
+    }
+    .modal-content p {
+        font-size: 0.95em; /* Reduce modal content text size */
+    }
+    .close-button {
+        font-size: 26px; /* Slightly reduce close button size */
+        top: 8px;
+        right: 10px;
+    }
+    .modal-img {
+        max-height: 250px; /* Further adjust image height for smaller phone screens */
+    }
+}
+
+/* Additional media query for very small phones (max-width 400px, e.g., older iPhones/Androids) */
+@media (max-width: 400px) {
+    .modal-content {
+        padding: 10px; /* Reduce padding even more */
+        max-height: 75vh; /* Adjust for very short screens */
+    }
+    .modal-content h2 {
+        font-size: 1.4em;
+    }
+    .modal-content p {
+        font-size: 0.9em;
+    }
+    .close-button {
+        font-size: 22px;
+        top: 5px;
+        right: 8px;
     }
 }
