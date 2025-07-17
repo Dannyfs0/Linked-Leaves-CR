@@ -445,16 +445,20 @@ footer {
     }
 }
 @media (max-width: 400px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 10px; /* Más juntos */
+    }
     .tree-card {
-        aspect-ratio: 1;
-        max-width: 85vw;
+        aspect-ratio: 1 / 1.2; /* Menos alto */
+        max-width: 90vw;
         margin: 0 auto;
     }
     .tree-card h3 {
-        font-size: 2.2em;
+        font-size: 2.6em; /* Más grande */
     }
     .tree-card p {
-        font-size: 0.85em;
+        font-size: 0.95em;
     }
     .modal-content {
         padding: 10px;
