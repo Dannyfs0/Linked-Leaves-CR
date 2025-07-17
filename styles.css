@@ -132,8 +132,8 @@ main {
 }
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
 }
 
 .tree-card {
@@ -148,7 +148,10 @@ main {
     flex-direction: column;
     justify-content: flex-start; 
     aspect-ratio: 1 / 1.3; 
-    height: auto; 
+    height: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
 }
 
 .tree-card:hover {
@@ -223,8 +226,8 @@ footer {
 }
 
 .photo-credits {
-    font-size: 0.8em; */
-    color: rgba(255, 255, 255, 0.8); 
+    font-size: 0.8em; 
+    color:rgba(255, 255, 255, 0.8); 
     margin-top: 5px; 
 }
 .modal {
@@ -443,17 +446,15 @@ footer {
 }
 @media (max-width: 400px) {
     .tree-card {
-        aspect-ratio: 1 
+        aspect-ratio: 1;
+        max-width: 85vw;
         margin: 0 auto;
     }
-    .tree-card img {
-        height: 50%;
-    }
     .tree-card h3 {
-        font-size: 1.8em; /* Ajuste para el nombre de la carta */
+        font-size: 2.2em;
     }
     .tree-card p {
-        font-size: 0.85em; 
+        font-size: 0.85em;
     }
     .modal-content {
         padding: 10px;
