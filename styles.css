@@ -150,8 +150,13 @@ main {
 /* ******************************************* */
 .gallery {
     display: grid;
+    /* auto-fit asegura que las columnas se ajusten para llenar el espacio */
+    /* minmax(250px, 1fr) permite que las columnas sean al menos 250px,
+       y 1fr las hace expandirse para llenar el espacio restante,
+       pero la carta individual tendrá un max-width */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: 30px;
+    justify-content: center; /* Centra las tarjetas si no llenan todo el ancho */
 }
 
 .tree-card {
@@ -165,8 +170,12 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Alinea el contenido al inicio de la tarjeta */
-    aspect-ratio: 1 / 1.3; 
+    
+    /* Control de tamaño global para la tarjeta */
+    aspect-ratio: 1 / 1.25; /* AJUSTADO: Un poco más cuadrada para que la imagen no se vea "larga" */
     height: auto; 
+    max-width: 320px; /* NUEVO: Limita el ancho máximo de la carta en pantallas grandes */
+    margin: 0 auto; /* Centra las tarjetas en su celda de la cuadrícula */
 }
 
 .tree-card:hover {
@@ -176,7 +185,7 @@ main {
 
 .tree-card img {
     width: 100%;
-    height: 60%; 
+    height: 65%; /* AJUSTADO: Más altura para la imagen para que no parezca tan pequeña */
     object-fit: cover; 
     border-radius: 8px 8px 0 0; 
 }
@@ -185,13 +194,13 @@ main {
     font-size: 1.8em; 
     color: #2e7d32;
     margin: 10px 10px 5px; 
-    white-space: nowrap; 
+    white-space: normal; /* AJUSTADO: Permite que el nombre salte de línea si es muy largo */
     overflow: hidden; 
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis; /* Esto sigue aplicando si el texto es muy largo para varias líneas */
 }
 
 .tree-card p {
-    font-size: 1.8em;
+    font-size: 1em; /* Ajustado para que sea legible y quepa bien */
     color: #2e7d32;
     margin: 0 10px 10px; 
     flex-grow: 1; 
@@ -271,7 +280,6 @@ footer {
     background-color: rgba(0,0,0,0.7); /* Fondo oscuro semi-transparente */
     
     /* Centra el contenido del modal perfectamente */
-    display: flex; /* JavaScript debe establecer esto a 'flex' al abrir */
     justify-content: center; /* Centra horizontalmente modal-content */
     align-items: center; /* Centra verticalmente modal-content */
 }
@@ -412,18 +420,21 @@ footer {
     }
     .gallery {
         grid-template-columns: 1fr; /* Una columna en tabletas y móviles */
-        gap: 24px; /* AJUSTADO: Aumentar el espacio entre tarjetas en tablets */
+        gap: 20px; /* Espacio entre tarjetas en tablets */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.3;
-        max-width: 90%; /* Permitir que la tarjeta sea más ancha en tablets */
+        aspect-ratio: 1 / 1.2; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
+        max-width: 90vw; /* AJUSTADO: Permitir que la tarjeta sea más ancha en tablets */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
-        height: 60%;
+        height: 60%; /* AJUSTADO: Ligeramente menos altura para dejar espacio al texto */
     }
     .tree-card h3 {
-        font-size: 1.6em; /* AJUSTADO: Tamaño de fuente para el nombre de la tarjeta en tablets */
+        font-size: 1.7em; /* AJUSTADO: Tamaño de fuente para el nombre de la tarjeta en tablets */
+    }
+    .tree-card p {
+        font-size: 0.95em; /* Ajustado para caber mejor */
     }
     .about-content {
         margin: 15px auto;
@@ -436,9 +447,6 @@ footer {
         max-width: 500px;
         max-height: 90vh;
         padding: 20px;
-    }
-    .modal-img {
-        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
     }
     .modal-content h2 {
         font-size: 2.2em;
@@ -478,11 +486,11 @@ footer {
 
     .gallery {
         grid-template-columns: 1fr;
-        gap: 16px; /* AJUSTADO: Aumentar el espacio entre tarjetas en teléfonos */
+        gap: 15px; /* AJUSTADO: Espacio entre tarjetas en teléfonos */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.25; /* AJUSTADO: Más alto para dar más espacio al texto */
-        max-width: 95%; /* Permitir que la tarjeta sea casi 100% del ancho del main */
+        aspect-ratio: 1 / 1.15; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
+        max-width: 95vw; /* AJUSTADO: Usar viewport width para que ocupe más espacio horizontal */
         margin: 0 auto; /* Centra la tarjeta en la columna */
         padding: 4px 0;
         display: flex;
@@ -490,17 +498,17 @@ footer {
         justify-content: flex-start;
     }
     .tree-card img {
-        height: 50%; /* AJUSTADO: Mismo valor que antes para la imagen */
+        height: 55%; /* AJUSTADO: Menos altura para la imagen para dejar más espacio al texto */
         object-fit: cover;
     }
     .tree-card h3 {
-        font-size: 1.8em; /* AJUSTADO: Tamaño de fuente para el nombre en teléfonos, un poco más pequeño */
+        font-size: 1.6em; /* AJUSTADO: Tamaño de fuente para el nombre en teléfonos, ligeramente más grande para legibilidad */
         margin-top: 8px;
         margin-bottom: 4px;
         white-space: normal; /* Permite que el nombre ocupe varias líneas si es largo */
     }
     .tree-card p {
-        font-size: 0.95em; /* Ligeramente más pequeño para la descripción */
+        font-size: 0.9em; /* Ligeramente más pequeño para la descripción */
     }
 
     /* Ajustes del Modal para teléfonos */
@@ -528,11 +536,11 @@ footer {
 @media (max-width: 400px) {
     .gallery {
         grid-template-columns: 1fr;
-        gap: 12px; /* AJUSTADO: Aumentar el espacio entre tarjetas en teléfonos muy pequeños */
+        gap: 10px; /* AJUSTADO: Espacio entre tarjetas en teléfonos muy pequeños */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.15; /* AJUSTADO: Más alto para dar más espacio al texto */
-        max-width: 98%; /* Casi 100% para pantallas muy pequeñas */
+        aspect-ratio: 1 / 1.1; /* AJUSTADO: Tarjeta más cuadrada aún */
+        max-width: 98vw; /* AJUSTADO: Usar viewport width para que ocupe casi todo el ancho */
         margin: 0 auto;
         padding: 2px 0;
         display: flex;
@@ -540,10 +548,10 @@ footer {
         justify-content: flex-start;
     }
     .tree-card img {
-        height: 40%; /* AJUSTADO: Disminuir un poco la altura de la imagen para dar más espacio al texto */
+        height: 50%; /* AJUSTADO: Disminuir un poco la altura de la imagen para dar más espacio al texto */
     }
     .tree-card h3 {
-        font-size: 1.5em; /* AJUSTADO: Tamaño de fuente para el nombre de la carta en teléfonos muy pequeños */
+        font-size: 1.4em; /* AJUSTADO: Tamaño de fuente para el nombre de la carta en teléfonos muy pequeños */
         margin-top: 8px;
         margin-bottom: 4px;
         white-space: normal;
@@ -552,7 +560,7 @@ footer {
         z-index: 2;
     }
     .tree-card p {
-        font-size: 0.85em; /* Ajuste para la descripción */
+        font-size: 0.8em; /* Ajuste para la descripción */
     }
     
     /* Ajustes del Modal para teléfonos muy pequeños */
