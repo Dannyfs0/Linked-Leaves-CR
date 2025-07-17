@@ -363,10 +363,11 @@ footer {
     }
     .gallery {
         grid-template-columns: 1fr; /* Una columna en tablets y móviles */
+        gap: 20px; /* Reducir el espacio entre tarjetas en móvil */
     }
     .tree-card {
         aspect-ratio: 1 / 1.3;
-        max-width: 320px; /* Limita el ancho de la tarjeta para que no sea muy grande */
+        max-width: 280px; /* Ajuste: un tamaño más pequeño para móviles/tablets */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
@@ -382,18 +383,16 @@ footer {
 
     /* Modal adjustments for tablets */
     .modal-content {
-        width: 95%; /* Ocupa casi todo el ancho disponible */
-        max-width: 500px; /* Pero no más grande que este valor fijo, para que no se estire demasiado en tablets grandes */
-        max-height: 90vh; /* Permite que el modal sea un poco más alto para la imagen */
+        width: 95%;
+        max-width: 500px;
+        max-height: 90vh;
         padding: 20px;
-    }
-    .modal-img {
-        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
     }
     .modal-content h2 {
         font-size: 2.2em;
     }
 }
+/* Styles for phones (max-width 600px) */
 /* Styles for phones (max-width 600px) */
 @media (max-width: 600px) {
     header h1 {
@@ -427,7 +426,7 @@ footer {
 
     .tree-card {
         aspect-ratio: 1 / 1.35;
-        max-width: 320px; /* Limita el ancho de la tarjeta en móviles */
+        max-width: 280px; /* Limita el ancho de la tarjeta en móviles */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
@@ -442,11 +441,11 @@ footer {
 
     /* Modal adjustments for phones */
     .modal-content {
-        width: 95%; /* Ocupa casi todo el ancho disponible */
-        max-width: 450px; /* Para que no se estire demasiado en horizontal en pantallas un poco más grandes */
-        max-height: 90vh; /* Permite que el modal sea un poco más alto para la imagen */
+        width: 95%;
+        max-width: 450px;
+        max-height: 90vh;
         padding: 15px;
-        margin: 10px auto; /* Centra el modal y le da un margen para que no toque los bordes */
+        margin: 10px auto;
     }
     .modal-content h2 {
         font-size: 1.8em;
@@ -459,15 +458,12 @@ footer {
         top: 8px;
         right: 10px;
     }
-    .modal-img {
-        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
-    }
 }
 /* Additional media query for very small phones (max-width 400px, e.g., older iPhones/Androids) */
 @media (max-width: 400px) {
     .tree-card {
         aspect-ratio: 1 / 1.4;
-        max-width: 100%; /* Permitir que se ajuste al 100% de ancho del contenedor en pantallas muy pequeñas, manteniendo el centrado */
+        max-width: 250px; /* Puede que necesite ser aún más pequeño o usar 100% con padding en main */
         margin: 0 auto;
     }
     .tree-card img {
@@ -480,7 +476,7 @@ footer {
     /* Modal adjustments for very small phones */
     .modal-content {
         padding: 10px;
-        max-height: 85vh; /* Ajuste la altura para pantallas muy pequeñas, si es necesario */
+        max-height: 85vh;
         margin: 10px auto;
     }
     .modal-content h2 {
@@ -493,8 +489,5 @@ footer {
         font-size: 22px;
         top: 5px;
         right: 8px;
-    }
-    .modal-img {
-        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
     }
 }
