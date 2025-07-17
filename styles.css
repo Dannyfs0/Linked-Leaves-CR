@@ -429,14 +429,17 @@ footer {
         justify-content: flex-start;
     }
     .tree-card img {
-        height: 45%; /* Menos alto aún */
+        height: 35%; /* Mucho menos alto */
         object-fit: cover;
     }
     .tree-card h3 {
-        font-size: 2.6em; /* Mucho más grande */
+        font-size: 3em; /* Mucho más grande */
         margin-top: 8px;
         margin-bottom: 4px;
         white-space: normal;
+        background: #fff; /* Fondo blanco para que nunca quede tapado */
+        position: relative;
+        z-index: 2;
     }
     .tree-card p {
         font-size: 1.15em;
