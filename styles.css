@@ -354,7 +354,7 @@ footer {
     .search-filter input[type="text"],
     .search-filter select {
         min-width: 100%;
-        font-size: 1em;
+        font-size: 1.8em;
     }
 
     main {
@@ -435,7 +435,7 @@ footer {
         font-size: 2.2em;
     }
     .tree-card p {
-        font-size: 1.8em;
+        font-size: 0.95em;
     }
 
     /* Modal adjustments for phones */
