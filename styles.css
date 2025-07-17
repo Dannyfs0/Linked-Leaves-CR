@@ -322,7 +322,7 @@ footer {
         margin-bottom: 10px;
     }
     header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem; /* AUMENTADO: Tamaño para tablets */
     }
 
     /* Ajuste para el lema en tablets */
@@ -354,7 +354,7 @@ footer {
     .search-filter input[type="text"],
     .search-filter select {
         min-width: 100%;
-        font-size: 1.8em;
+        font-size: 1em;
     }
 
     main {
@@ -374,7 +374,7 @@ footer {
         height: 60%;
     }
     .tree-card h3 {
-        font-size: 2.5em;
+        font-size: 2em; /* Tamaño para el nombre de la carta en tablets */
     }
     .about-content {
         margin: 15px auto;
@@ -388,6 +388,9 @@ footer {
         max-height: 90vh;
         padding: 20px;
     }
+    .modal-img {
+        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
+    }
     .modal-content h2 {
         font-size: 2.2em;
     }
@@ -395,7 +398,7 @@ footer {
 /* Styles for phones (max-width 600px) */
 @media (max-width: 600px) {
     header h1 {
-        font-size: 1.8em;
+        font-size: 2.2em; /* AUMENTADO: Tamaño para la mayoría de los teléfonos */
     }
     header p {
         font-size: 0.9em;
@@ -432,7 +435,7 @@ footer {
         height: 55%;
     }
     .tree-card h3 {
-        font-size: 2.2em;
+        font-size: 1.8em; /* Tamaño para el nombre de la carta en móviles */
     }
     .tree-card p {
         font-size: 0.95em;
@@ -459,6 +462,7 @@ footer {
     }
 }
 /* Additional media query for very small phones (max-width 400px, e.g., older iPhones/Androids) */
+/* Additional media query for very small phones (max-width 400px, e.g., older iPhones/Androids) */
 @media (max-width: 400px) {
     .tree-card {
         aspect-ratio: 1 / 1.4;
@@ -469,7 +473,7 @@ footer {
         height: 50%;
     }
     .tree-card h3 {
-        font-size: 1.8em;
+        font-size: 1.6em; /* Tamaño para el nombre de la carta en teléfonos muy pequeños */
     }
     
     /* Modal adjustments for very small phones */
