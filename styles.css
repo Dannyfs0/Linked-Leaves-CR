@@ -327,7 +327,7 @@ footer {
 
     /* Ajuste para el lema en tablets */
     .call-to-action {
-        font-size: 1.1em;
+        font-size: 1.8em;
         margin-top: 10px;
         padding: 6px 12px;
         max-width: 90%;
@@ -403,7 +403,7 @@ footer {
     }
     /* Ajuste para el lema en móviles */
     .call-to-action {
-        font-size: 1em;
+        font-size: 1.5em;
         margin-top: 8px;
         padding: 5px 10px;
         max-width: 90%;
