@@ -172,7 +172,7 @@ main {
     justify-content: flex-start; /* Alinea el contenido al inicio de la tarjeta */
     
     /* Control de tamaño global para la tarjeta */
-    aspect-ratio: 1 / 1.25; /* AJUSTADO: Un poco más cuadrada para que la imagen no se vea "larga" */
+    aspect-ratio: 1 / 1.15; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
     height: auto; 
     max-width: 320px; /* NUEVO: Limita el ancho máximo de la carta en pantallas grandes */
     margin: 0 auto; /* Centra las tarjetas en su celda de la cuadrícula */
@@ -185,24 +185,24 @@ main {
 
 .tree-card img {
     width: 100%;
-    height: 65%; /* AJUSTADO: Más altura para la imagen para que no parezca tan pequeña */
+    height: 70%; /* AJUSTADO: Aún más altura para la imagen para que no parezca tan pequeña y la tarjeta tan vacía */
     object-fit: cover; 
     border-radius: 8px 8px 0 0; 
 }
 
 .tree-card h3 {
-    font-size: 1.8em; 
+    font-size: 1.6em; /* AJUSTADO: Ligeramente más pequeño para dar espacio */
     color: #2e7d32;
-    margin: 10px 10px 5px; 
-    white-space: normal; /* AJUSTADO: Permite que el nombre salte de línea si es muy largo */
+    margin: 8px 10px 4px; /* AJUSTADO: Márgenes para el nombre */
+    white-space: normal; /* Permite que el nombre salte de línea si es muy largo */
     overflow: hidden; 
     text-overflow: ellipsis; /* Esto sigue aplicando si el texto es muy largo para varias líneas */
 }
 
 .tree-card p {
-    font-size: 1em; /* Ajustado para que sea legible y quepa bien */
+    font-size: 0.9em; /* AJUSTADO: Más pequeño para la descripción */
     color: #2e7d32;
-    margin: 0 10px 10px; 
+    margin: 0 10px 8px; /* AJUSTADO: Márgenes para la descripción */
     flex-grow: 1; 
     overflow: hidden; 
     display: -webkit-box; 
@@ -355,11 +355,6 @@ footer {
 }
 
 /* ******************************************* */
-/* ******** FIN ESTILOS DEL MODAL ******** */
-/* ******************************************* */
-
-
-/* ******************************************* */
 /* ******** DISEÑO RESPONSIVO (MEDIA QUERIES) ******** */
 /* ******************************************* */
 
@@ -423,18 +418,21 @@ footer {
         gap: 20px; /* Espacio entre tarjetas en tablets */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.2; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
+        aspect-ratio: 1 / 1.1; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
         max-width: 90vw; /* AJUSTADO: Permitir que la tarjeta sea más ancha en tablets */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
-        height: 60%; /* AJUSTADO: Ligeramente menos altura para dejar espacio al texto */
+        height: 65%; /* AJUSTADO: Ligeramente menos altura para dejar espacio al texto */
     }
     .tree-card h3 {
-        font-size: 1.7em; /* AJUSTADO: Tamaño de fuente para el nombre de la tarjeta en tablets */
+        font-size: 1.6em; /* AJUSTADO: Tamaño de fuente para el nombre de la tarjeta en tablets */
+        margin-top: 8px; /* Ajuste para el nombre */
+        margin-bottom: 4px; /* Ajuste para el nombre */
     }
     .tree-card p {
-        font-size: 0.95em; /* Ajustado para caber mejor */
+        font-size: 0.9em; /* Ajustado para caber mejor */
+        margin: 0 10px 8px; /* Ajuste para la descripción */
     }
     .about-content {
         margin: 15px auto;
@@ -447,6 +445,9 @@ footer {
         max-width: 500px;
         max-height: 90vh;
         padding: 20px;
+    }
+    .modal-img {
+        /* No se necesita max-height aquí, ya se estira al 100% de su ancho */
     }
     .modal-content h2 {
         font-size: 2.2em;
@@ -489,7 +490,7 @@ footer {
         gap: 15px; /* AJUSTADO: Espacio entre tarjetas en teléfonos */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.15; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
+        aspect-ratio: 1 / 1.1; /* AJUSTADO: Más cuadrada para que la imagen no se vea tan larga */
         max-width: 95vw; /* AJUSTADO: Usar viewport width para que ocupe más espacio horizontal */
         margin: 0 auto; /* Centra la tarjeta en la columna */
         padding: 4px 0;
@@ -498,17 +499,18 @@ footer {
         justify-content: flex-start;
     }
     .tree-card img {
-        height: 55%; /* AJUSTADO: Menos altura para la imagen para dejar más espacio al texto */
+        height: 60%; /* AJUSTADO: Aumenta la altura de la imagen para que ocupe más espacio */
         object-fit: cover;
     }
     .tree-card h3 {
-        font-size: 1.6em; /* AJUSTADO: Tamaño de fuente para el nombre en teléfonos, ligeramente más grande para legibilidad */
+        font-size: 1.5em; /* AJUSTADO: Tamaño de fuente para el nombre en teléfonos, ligeramente más grande para legibilidad */
         margin-top: 8px;
         margin-bottom: 4px;
         white-space: normal; /* Permite que el nombre ocupe varias líneas si es largo */
     }
     .tree-card p {
-        font-size: 0.9em; /* Ligeramente más pequeño para la descripción */
+        font-size: 0.85em; /* Ligeramente más pequeño para la descripción */
+        margin: 0 10px 8px; /* Ajuste para la descripción */
     }
 
     /* Ajustes del Modal para teléfonos */
@@ -539,7 +541,7 @@ footer {
         gap: 10px; /* AJUSTADO: Espacio entre tarjetas en teléfonos muy pequeños */
     }
     .tree-card {
-        aspect-ratio: 1 / 1.1; /* AJUSTADO: Tarjeta más cuadrada aún */
+        aspect-ratio: 1 / 1; /* AJUSTADO: Tarjeta más cuadrada aún */
         max-width: 98vw; /* AJUSTADO: Usar viewport width para que ocupe casi todo el ancho */
         margin: 0 auto;
         padding: 2px 0;
@@ -548,10 +550,10 @@ footer {
         justify-content: flex-start;
     }
     .tree-card img {
-        height: 50%; /* AJUSTADO: Disminuir un poco la altura de la imagen para dar más espacio al texto */
+        height: 55%; /* AJUSTADO: Aumentar la altura de la imagen para dar más espacio a la imagen */
     }
     .tree-card h3 {
-        font-size: 1.4em; /* AJUSTADO: Tamaño de fuente para el nombre de la carta en teléfonos muy pequeños */
+        font-size: 1.3em; /* AJUSTADO: Tamaño de fuente para el nombre de la carta en teléfonos muy pequeños */
         margin-top: 8px;
         margin-bottom: 4px;
         white-space: normal;
@@ -560,7 +562,8 @@ footer {
         z-index: 2;
     }
     .tree-card p {
-        font-size: 0.8em; /* Ajuste para la descripción */
+        font-size: 0.75em; /* Ajuste para la descripción, más pequeño para que quepa */
+        margin: 0 10px 8px; /* Ajuste para la descripción */
     }
     
     /* Ajustes del Modal para teléfonos muy pequeños */
