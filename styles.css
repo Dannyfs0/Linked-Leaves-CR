@@ -1,9 +1,9 @@
-/* Base Styles for HTML and Body */
+/* Estilos Base para HTML y Body */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures padding and borders are included in the element's total width/height */
+    box-sizing: border-box; /* Asegura que el padding y los bordes se incluyan en el ancho/alto total del elemento */
 }
 
 body {
@@ -12,40 +12,40 @@ body {
     color: #000000;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures the footer stays at the bottom */
+    min-height: 100vh; /* Asegura que el pie de página se quede en la parte inferior */
 }
 
-/* Header Section */
+/* Sección del Encabezado (Header) */
 header {
-    background-color: #2e7d32; /* Dark green background */
-    color: white; /* Ensures text within the header is white */
-    padding: 1rem 0; /* Padding top and bottom */
+    background-color: #2e7d32; /* Fondo verde oscuro */
+    color: white; /* Asegura que el texto dentro del encabezado sea blanco */
+    padding: 1rem 0; /* Relleno superior e inferior */
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; /* Stacks logo/title and description */
-    align-items: center; /* Centers content horizontally */
+    flex-direction: column; /* Apila el logo/título y la descripción */
+    align-items: center; /* Centra el contenido horizontalmente */
 }
 
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers content horizontally */
-    gap: 15px; /* Space between logo and text */
-    margin-bottom: 10px; /* Space between logo/title and description */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    gap: 15px; /* Espacio entre el logo y el texto */
+    margin-bottom: 10px; /* Espacio entre el logo/título y la descripción */
 }
 
 .header-logo {
-    height: 80px; /* Logo size */
-    width: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Makes the logo circular */
-    object-fit: cover; /* Ensures the image is not distorted */
+    height: 80px; /* Tamaño del logo */
+    width: auto; /* Mantiene la relación de aspecto */
+    border-radius: 50%; /* Hace el logo circular */
+    object-fit: cover; /* Asegura que la imagen no se distorsione */
 }
 
 header h1 {
     margin: 0;
-    color: white; /* Ensures h1 is white */
-    font-size: 2.5rem; /* Increased main title size */
+    color: white; /* Asegura que h1 sea blanco */
+    font-size: 2.5rem; /* Tamaño del título principal aumentado */
     font-weight: 700;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
@@ -53,18 +53,18 @@ header h1 {
 header p {
     margin: 0;
     font-size: 1em;
-    color: white; /* Ensures paragraph is white */
+    color: white; /* Asegura que el párrafo sea blanco */
 }
 
-/* Navigation Bar */
+/* Barra de Navegación (Nav) */
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     gap: 20px;
-    flex-wrap: wrap; /* Allows nav items to wrap on smaller screens */
-    justify-content: center; /* Center nav items when wrapped */
+    flex-wrap: wrap; /* Permite que los ítems de navegación se ajusten en pantallas más pequeñas */
+    justify-content: center; /* Centra los ítems de navegación cuando se ajustan */
 }
 
 nav ul li a {
@@ -80,9 +80,9 @@ nav ul li a:hover {
     background-color: rgba(255,255,255,0.2);
 }
 
-/* Main Content Area */
+/* Área de Contenido Principal (Main) */
 main {
-    flex: 1; /* Allows main content to grow and push the footer down */
+    flex: 1; /* Permite que el contenido principal crezca y empuje el pie de página hacia abajo */
     padding: 20px;
     max-width: 1200px;
     margin: 20px auto;
@@ -91,7 +91,7 @@ main {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Search and Filter Section */
+/* Sección de Búsqueda y Filtro */
 .search-filter {
     display: flex;
     justify-content: center;
@@ -146,7 +146,7 @@ main {
 }
 
 /* ******************************************* */
-/* ******** GALLERY SECTION (TREE CARDS) ******** */
+/* ******** SECCIÓN DE GALERÍA (CARTAS DE ÁRBOL) ******** */
 /* ******************************************* */
 .gallery {
     display: grid;
@@ -155,7 +155,7 @@ main {
 }
 
 .tree-card {
-    background-color: #e8f5e9; /* Light green background for cards */
+    background-color: #e8f5e9; /* Fondo verde claro para las cartas */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     overflow: hidden; 
@@ -202,15 +202,15 @@ main {
 }
 
 .tree-card p strong {
-    color: #000000; /* Blue for strong text in cards */
+    color: #007bff; /* Azul para texto en negrita en las cartas */
 }
 
 /* ******************************************* */
-/* ******** END GALLERY SECTION CHANGES ******** */
+/* ******** FIN SECCIÓN DE GALERÍA ******** */
 /* ******************************************* */
 
 
-/* About Page Specific Styles */
+/* Estilos Específicos de la Página "Acerca de" (About) */
 .about-content {
     padding: 30px;
     line-height: 1.8;
@@ -229,22 +229,22 @@ main {
 }
 
 .about-content p {
-    margin-bottom: 20px; /* More space between paragraphs */
+    margin-bottom: 20px; /* Más espacio entre párrafos */
     font-size: 1.15em;
 }
 
 .about-content strong {
-    color: #000000; /* Distinct color for important text in "About" */
+    color: #007bff; /* Color distintivo para texto importante en "Acerca de" */
 }
 
-/* Footer */
+/* Pie de Página (Footer) */
 footer {
     width: 100%;
-    background-color: #222020;
+    background-color: #2e7d32;
     color: white;
     text-align: center;
     padding: 1rem 0;
-    margin-top: auto; /* Pushes the footer to the bottom */
+    margin-top: auto; /* Empuja el pie de página hacia abajo */
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     font-size: 0.9em;
 }
@@ -256,27 +256,27 @@ footer {
 }
 
 /* ******************************************* */
-/* ******** MODAL STYLES ******** */
+/* ******** ESTILOS DEL MODAL ******** */
 /* ******************************************* */
 
-/* Modal Overlay */
+/* Superposición del Modal */
 .modal {
-    display: none; /* Hidden by default; JavaScript will change to 'flex' to show it */
-    position: fixed; /* Fixed on the screen */
-    z-index: 1000; /* Ensures it's above all other content */
+    display: none; /* Oculto por defecto; JavaScript lo cambiará a 'flex' para mostrarlo */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Asegura que esté por encima de todo el demás contenido */
     left: 0;
     top: 0;
-    width: 100%; /* Covers full viewport width */
-    height: 100%; /* Covers full viewport height */
-    background-color: rgba(0,0,0,0.7); /* Semi-transparent dark background */
+    width: 100%; /* Cubre el ancho completo del viewport */
+    height: 100%; /* Cubre el alto completo del viewport */
+    background-color: rgba(0,0,0,0.7); /* Fondo oscuro semi-transparente */
     
-    /* Centers the modal content perfectly */
-    display: flex; /* JavaScript must set this to 'flex' when opening */
-    justify-content: center; /* Horizontally center modal-content */
-    align-items: center; /* Vertically center modal-content */
+    /* Centra el contenido del modal perfectamente */
+    display: flex; /* JavaScript debe establecer esto a 'flex' al abrir */
+    justify-content: center; /* Centra horizontalmente modal-content */
+    align-items: center; /* Centra verticalmente modal-content */
 }
 
-/* Modal Content Box */
+/* Caja de Contenido del Modal */
 .modal-content {
     background-color: #fefefe;
     padding: 25px; 
@@ -292,19 +292,19 @@ footer {
     overflow-y: auto; 
     box-sizing: border-box; 
     
-    /* Entry animation (optional) */
+    /* Animación de entrada (opcional) */
     transform: scale(0.9);
     opacity: 0;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-/* When modal is active (JavaScript should add this class if you use animations) */
+/* Cuando el modal está activo (JavaScript debería añadir esta clase si usas animaciones) */
 .modal.active .modal-content {
     transform: scale(1);
     opacity: 1;
 }
 
-/* Close Button (x) */
+/* Botón de Cierre (x) */
 .close-button {
     color: #aaa;
     font-size: 30px; 
@@ -322,7 +322,7 @@ footer {
     text-decoration: none;
 }
 
-/* Internal Modal Content (for better control of text and images) */
+/* Contenido Interno del Modal (para un mejor control de texto e imágenes) */
 .modal-img { 
     max-width: 100%; 
     height: auto; 
@@ -347,15 +347,15 @@ footer {
 }
 
 /* ******************************************* */
-/* ******** END MODAL STYLES ******** */
+/* ******** FIN ESTILOS DEL MODAL ******** */
 /* ******************************************* */
 
 
 /* ******************************************* */
-/* ******** RESPONSIVE DESIGN (MEDIA QUERIES) ******** */
+/* ******** DISEÑO RESPONSIVO (MEDIA QUERIES) ******** */
 /* ******************************************* */
 
-/* Styles for tablets and small desktops (max-width 768px) */
+/* Estilos para tabletas y escritorios pequeños (max-width 768px) */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -371,10 +371,10 @@ footer {
         margin-bottom: 10px;
     }
     header h1 {
-        font-size: 2.5rem; /* AUMENTADO: Tamaño del título principal para tablets */
+        font-size: 2.5rem; /* Tamaño del título principal para tabletas */
     }
 
-    /* Ajuste para el lema en tablets */
+    /* Ajuste para el lema en tabletas */
     .call-to-action {
         font-size: 1.1em;
         margin-top: 10px;
@@ -395,15 +395,15 @@ footer {
         margin: 0 auto;
     }
 
-    /* Ajuste para tablets: Search/Filter */
+    /* Ajuste para tabletas: Búsqueda/Filtro */
     .search-filter {
-        gap: 15px; /* Ajuste de espacio para tablets */
-        padding: 20px 15px; /* Ajuste de padding para tablets */
+        gap: 15px;
+        padding: 20px 15px;
     }
     .search-filter input[type="text"],
     .search-filter select {
-        min-width: 100%; /* Ocupar todo el ancho disponible en móviles */
-        font-size: 1em; /* Ajuste de fuente para móviles */
+        min-width: 100%;
+        font-size: 1em;
     }
 
     main {
@@ -411,26 +411,26 @@ footer {
         margin: 15px auto;
     }
     .gallery {
-        grid-template-columns: 1fr; /* Una columna en tablets y móviles */
+        grid-template-columns: 1fr; /* Una columna en tabletas y móviles */
         gap: 20px; /* Reducir el espacio entre tarjetas en móvil */
     }
     .tree-card {
         aspect-ratio: 1 / 1.3;
-        max-width: 280px; /* Ajuste: un tamaño más pequeño para móviles/tablets */
+        max-width: 200px; /* AJUSTADO: Aún más pequeño para tablets para acercarse a la vista móvil deseada */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
         height: 60%;
     }
     .tree-card h3 {
-        font-size: 2em; /* Tamaño para el nombre de la carta en tablets */
+        font-size: 1.6em; /* AJUSTADO: Tamaño para el nombre de la carta en tabletas, reducido */
     }
     .about-content {
         margin: 15px auto;
         padding: 20px;
     }
 
-    /* Modal adjustments for tablets */
+    /* Ajustes del Modal para tabletas */
     .modal-content {
         width: 95%;
         max-width: 500px;
@@ -445,10 +445,10 @@ footer {
     }
 }
 
-/* Styles for phones (max-width 600px) */
+/* Estilos para teléfonos (max-width 600px) */
 @media (max-width: 600px) {
     header h1 {
-        font-size: 2.2em; /* AUMENTADO: Tamaño del título principal para la mayoría de los teléfonos */
+        font-size: 2.2em; /* Tamaño del título principal para la mayoría de los teléfonos */
     }
     header p {
         font-size: 0.9em;
@@ -470,7 +470,7 @@ footer {
         font-size: 1.8em;
     }
 
-    /* Ajuste para móviles: Search/Filter */
+    /* Ajuste para móviles: Búsqueda/Filtro */
     .search-filter {
         margin-bottom: 25px;
         padding: 15px 10px;
@@ -478,20 +478,20 @@ footer {
 
     .tree-card {
         aspect-ratio: 1 / 1.35;
-        max-width: 280px; /* Limita el ancho de la tarjeta en móviles */
+        max-width: 180px; /* AJUSTADO: Limita el ancho de la tarjeta en móviles a un valor más pequeño */
         margin: 0 auto; /* Centra la tarjeta en la columna */
     }
     .tree-card img {
         height: 55%;
     }
     .tree-card h3 {
-        font-size: 1.8em; /* Tamaño para el nombre de la carta en móviles */
+        font-size: 1.4em; /* AJUSTADO: Tamaño para el nombre de la carta en móviles, aún más pequeño */
     }
     .tree-card p {
-        font-size: 0.95em;
+        font-size: 0.85em; /* Ligeramente más pequeño para la descripción */
     }
 
-    /* Modal adjustments for phones */
+    /* Ajustes del Modal para teléfonos */
     .modal-content {
         width: 95%;
         max-width: 450px;
@@ -512,21 +512,24 @@ footer {
     }
 }
 
-/* Additional media query for very small phones (max-width 400px, e.g., older iPhones/Androids) */
+/* Consulta de medios adicional para teléfonos muy pequeños (max-width 400px) */
 @media (max-width: 400px) {
     .tree-card {
         aspect-ratio: 1 / 1.4;
-        max-width: 250px; /* Puede que necesite ser aún más pequeño o usar 100% con padding en main */
+        max-width: 160px; /* AJUSTADO: Aún más pequeño para teléfonos muy pequeños */
         margin: 0 auto;
     }
     .tree-card img {
         height: 50%;
     }
     .tree-card h3 {
-        font-size: 1.6em; /* Tamaño para el nombre de la carta en teléfonos muy pequeños */
+        font-size: 1.2em; /* AJUSTADO: Tamaño para el nombre de la carta en teléfonos muy pequeños */
+    }
+    .tree-card p {
+        font-size: 0.8em; /* Ligeramente más pequeño para la descripción */
     }
     
-    /* Modal adjustments for very small phones */
+    /* Ajustes del Modal para teléfonos muy pequeños */
     .modal-content {
         padding: 10px;
         max-height: 85vh;
