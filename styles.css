@@ -449,7 +449,7 @@ footer {
 @media (max-width: 400px) {
     .gallery {
         grid-template-columns: 1fr;
-        gap: 6px; /* Más juntos */
+        gap: 16px; /* Más juntos */
     }
     .tree-card {
         aspect-ratio: 1 / 1.2; /* Menos alto */
