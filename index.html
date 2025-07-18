@@ -4,1422 +4,933 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linked Leaves CR</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; 
+        }
+        .tree-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .tree-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0f2f7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #68d391; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #48bb78; 
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="header-content">
-            <img src="imagenes/logo.jpg" alt="Logo de Linked Leaves" class="header-logo">
-            <div>
-                <h1><em>Linked Leaves CR</em></h1>
-                <p><em>Descubre los árboles de la Península de Osa</em></p>
+<body class="flex flex-col min-h-screen">
+    
+    <header class="bg-green-800 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center mb-4 md:mb-0"> 
+                
+                <div id="logo-container" class="mb-3">
+                    <img src="imagenes/logo.jpg" alt="Logo de Linked Leaves" class="w-32 h-32 rounded-full"> 
+                </div>
+                <h1 class="text-4xl font-bold text-green-100 text-center">Linked Leaves CR</h1> 
             </div>
+            <nav class="flex space-x-6 mt-4"> 
+                <button id="home-btn" class="text-lg font-semibold hover:text-green-300 transition-colors duration-200 focus:outline-none">Inicio</button>
+                <button id="about-btn" class="text-lg font-semibold hover:text-green-300 transition-colors duration-200 focus:outline-none">Acerca de</button>
+            </nav>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="about.html">Acerca de</a></li>
-            </ul>
-        </nav>
+        <p class="text-center text-green-200 text-lg mt-2">Descubre los árboles de la Península de Osa</p>
     </header>
 
-    <main>
-        <section class="search-filter">
-            <input type="text" id="searchInput" placeholder="Buscar árbol...">
-            <select id="conservationFilter">
-                <option value="">Filtrar por conservación</option>
-                <option value="En peligro">En peligro</option>
-                <option value="Vulnerable">Vulnerable</option>
-                <option value="No en peligro">No en peligro</option>
-                <option value="Sin datos específicos">Sin datos específicos</option>
-            </select>
+    
+    <main class="container mx-auto p-6 flex-grow">
+        
+        <section id="about-section" class="hidden bg-white p-8 rounded-lg shadow-xl mb-8">
+            <h2 class="text-4xl font-bold text-green-800 mb-6 text-center">Acerca de Linked Leaves CR</h2>
+            <div class="text-gray-700 leading-relaxed text-lg">
+                <p class="mb-4">
+                    <strong class="text-black">Linked Leaves CR</strong> es un proyecto educativo con el propósito de promover el conocimiento y la valoración de la diversidad arbórea presente en la Península de Osa, Costa Rica. Esta página busca acercar a las personas, especialmente a los habitantes de la región, al reconocimiento de las distintas especies de árboles que los rodean.
+                </p>
+                <p class="mb-4">
+                    Además de facilitar la identificación de las especies, el proyecto pone especial énfasis en concientizar sobre el estado de conservación de cada árbol, ya que muchas de estas especies se encuentran en condición <strong class="text-black">vulnerable o en peligro</strong>. Por ello, Linked Leaves CR fue creado; ante la ausencia de una plataforma que se centrara específicamente en esta zona, era difícil conocer la diversidad de árboles de la Península de Osa.
+                </p>
+                <p>
+                    Toda la información presentada en esta página web ha sido cuidadosamente verificada y confirmada mediante fuentes confiables, con el fin de garantizar su precisión y utilidad educativa. Este proyecto representa un esfuerzo por parte del equipo que se encuentra detrás de esta página para tratar de cuidar la diversidad de árboles de la Península de Osa.
+                </p>
+            </div>
+        </section>
+
+        
+        <section id="home-section" class="block">
+            <div class="flex flex-col sm:flex-row items-center justify-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
+                
+                <input type="text" id="search-input" placeholder="Buscar árbol por nombre..."
+                       class="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-full sm:w-1/2 md:w-1/3 text-lg">
+
+                
+                <select id="filter-select"
+                        class="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-full sm:w-auto text-lg bg-white">
+                    <option value="Todos">Filtrar por Estado (Todos)</option>
+                    <option value="Vulnerable">Vulnerable</option>
+                    <option value="En peligro">En peligro</option>
+                    <option value="No en peligro">No en peligro</option>
+                    <option value="Sin datos específicos">Sin datos específicos</option>
+                </select>
+            </div>
+
             
-        </section>
-
-        <section class="gallery">
-            <div class="tree-card" data-tree-name="Guinízaro o Elemí" data-conservation="Vulnerable">
-                <img src="imagenes/Amyris magnifolia.jpg" alt="Guinízaro o Elemí" data-modal="modal1">
-                <p>Guinízaro o Elemí</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ajo negro - Cascarillo" data-conservation="En peligro">
-                <img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo Negro - Cascarillo" data-modal="modal2">
-                <p>Ajo negro - Cascarillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ron-Ron" data-conservation="En peligro">
-                <img src="imagenes/Ron-ron.jpg" alt="Ron-Ron" data-modal="modal3">
-                <p>Ron-Ron</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ajillo - Ardillo" data-conservation="Vulnerable">
-                <img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" data-modal="modal4">
-                <p>Ajillo - Ardillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Escobo" data-conservation="En peligro">
-                <img src="imagenes/Escobo.jpg" alt="Escobo" data-modal="modal5">
-                <p>Escobo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cascarillo" data-conservation="Vulnerable">
-                <img src="imagenes/Cascarillo.jpg" alt="Cascarillo" data-modal="modal6">
-                <p>Cascarillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Níspero" data-conservation="Vulnerable">
-                <img src="imagenes/Níspero.jpg" alt="Níspero" data-modal="modal7">
-                <p>Níspero</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ceibo barrigón" data-conservation="No en peligro">
-                <img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo Barrigón" data-modal="modal8">
-                <p>Ceibo barrigón</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ajo" data-conservation="En peligro">
-                <img src="imagenes/Ajo.jpg" alt="Ajo" data-modal="modal9">
-                <p>Ajo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cirri - Quira" data-conservation="En peligro">
-                <img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" data-modal="modal10">
-                <p>Cirri - Quira</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cedro amargo" data-conservation="Vulnerable">
-                <img src="imagenes/Cedro amargo.jpg" alt="Cedro Amargo" data-modal="modal11">
-                <p>Cedro amargo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ceiba" data-conservation="No en peligro">
-                <img src="imagenes/Ceiba.jpg" alt="Ceiba" data-modal="modal12">
-                <p>Ceiba</p>
-            </div>
-            <div class="tree-card" data-tree-name="Camibar" data-conservation="En peligro">
-                <img src="imagenes/Camibar.jpg" alt="Camibar" data-modal="modal13">
-                <p>Camibar</p>
-            </div>
-            <div class="tree-card" data-tree-name="Copo hediondo - Buriyon" data-conservation="Vulnerable">
-                <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo Hediondo - Buriyon" data-modal="modal14">
-                <p>Copo hediondo - Buriyon</p>
-            </div>
-            <div class="tree-card" data-tree-name="Matasano" data-conservation="En peligro">
-                <img src="imagenes/Matasano.jpg" alt="Matasano" data-modal="modal15">
-                <p>Matasano</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guapinol negro" data-conservation="No en peligro">
-                <img src="imagenes/Guapinol negro.jpg" alt="Guapinol Negro" data-modal="modal16">
-                <p>Guapinol negro</p>
-            </div>
-            <div class="tree-card" data-tree-name="Carey" data-conservation="Vulnerable">
-                <img src="imagenes/Carey.jpg" alt="Carey" data-modal="modal17">
-                <p>Carey</p>
-            </div>
-            <div class="tree-card" data-tree-name="Corteza amarillo" data-conservation="Vulnerable">
-                <img src="imagenes/Corteza amarillo.jpeg" alt="Corteza Amarillo" data-modal="modal18">
-                <p>Corteza amarillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Naranjillo" data-conservation="Vulnerable">
-                <img src="imagenes/Naranjillo.jpg" alt="Naranjillo" data-modal="modal19">
-                <p>Naranjillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Chiricano Alegre" data-conservation="Vulnerable">
-                <img src="imagenes/Chiricano alegre.jpg" alt="Chiricano Alegre" data-modal="modal20">
-                <p>Chiricano alegre</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guaba" data-conservation="En peligro">
-                <img src="imagenes/Guaba.jpeg" alt="Guaba" data-modal="modal21">
-                <p>Guaba</p>
-            </div>
-            <div class="tree-card" data-tree-name="Manu" data-conservation="En peligro">
-                <img src="imagenes/Manu.jpeg" alt="Manu" data-modal="modal22">
-                <p>Manu</p>
-            </div>
-            <div class="tree-card" data-tree-name="Mangle Nato" data-conservation="Vulnerable">
-                <img src="imagenes/Mangle nato.jpeg" alt="Mangle Nato" data-modal="modal23">
-                <p>Mangle nato</p>
-            </div>
-            <div class="tree-card" data-tree-name="Sándalo" data-conservation="En peligro">
-                <img src="imagenes/Sandalo.jpg" alt="Sándalo" data-modal="modal24">
-                <p>Sándalo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guarumo" data-conservation="No en peligro">
-                <img src="imagenes/Guarumo.jpg" alt="Guarumo" data-modal="modal25">
-                <p>Guarumo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ocotea" data-conservation="No en peligro">
-                <img src="imagenes/Ocotea.jpg" alt="Ocotea" data-modal="modal26">
-                <p>Ocotea</p>
-            </div>
-            <div class="tree-card" data-tree-name="Gavilán" data-conservation="En peligro">
-                <img src="imagenes/Gavilán.jpg" alt="Gavilán" data-modal="modal27">
-                <p>Gavilán</p>
-            </div>
-            <div class="tree-card" data-tree-name="Sangrillo" data-conservation="En peligro">
-                <img src="imagenes/Sangrillo.jpg" alt="Sangrillo" data-modal="modal28">
-                <p>Sangrillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guanacastillo - Ardillo - Tamarindón" data-conservation="En peligro">
-                <img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" data-modal="modal29">
-                <p>Guanacastillo - Ardillo - Tamarindón</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cachimbo" data-conservation="En peligro">
-                <img src="imagenes/Cachimbo.jpg" alt="Cachimbo" data-modal="modal30">
-                <p>Cachimbo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Pinillo" data-conservation="En peligro">
-                <img src="imagenes/Pinillo.jpeg" alt="Pinillo" data-modal="modal31">
-                <p>Pinillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cativo" data-conservation="En peligro">
-                <img src="imagenes/Cativo.jpeg" alt="Cativo" data-modal="modal32">
-                <p>Cativo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Iguano" data-conservation="Sin datos específicos">
-                <img src="imagenes/Iguano.jpg" alt="Iguano" data-modal="modal33">
-                <p>Iguano</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guachipelín" data-conservation="Sin datos específicos">
-                <img src="imagenes/Guachipelín.jpg" alt="Guachipelín" data-modal="modal34">
-                <p>Guachipelín</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cedro Caracolito" data-conservation="Sin datos específicos">
-                <img src="imagenes/Cedro caracolito.jpg" alt="Cedro Caracolito" data-modal="modal35">
-                <p>Cedro caracolito</p>
-            </div>
-            <div class="tree-card" data-tree-name="Reseco - Alazan" data-conservation="En peligro">
-                <img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" data-modal="modal36">
-                <p>Reseco - Alazan</p>
-            </div>
-            <div class="tree-card" data-tree-name="Tamarindo - Almendro" data-conservation="No en peligro">
-                <img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" data-modal="modal37">
-                <p>Tamarindo - Almendro</p>
-            </div>
-            <div class="tree-card" data-tree-name="Nazareno" data-conservation="En peligro">
-                <img src="imagenes/nazareno.jpg" alt="Nazareno" data-modal="modal38">
-                <p>Nazareno</p>
-            </div>
-            <div class="tree-card" data-tree-name="Hule" data-conservation="No en peligro">
-                <img src="imagenes/Hule.jpg" alt="Hule" data-modal="modal39">
-                <p>Hule</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cacao" data-conservation="No en peligro">
-                <img src="imagenes/cacao.png" alt="Cacao" data-modal="modal40">
-                <p>Cacao</p>
-            </div>
-            <div class="tree-card" data-tree-name="Níspero Zapote" data-conservation="Sin datos específicos">
-                <img src="imagenes/Níspero zapote.jpg" alt="Níspero Zapote" data-modal="modal41">
-                <p>Níspero zapote</p>
-            </div>
-            <div class="tree-card" data-tree-name="Bongo" data-conservation="Sin datos específicos">
-                <img src="imagenes/bongo.jpeg" alt="Bongo" data-modal="modal42">
-                <p>Bongo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Fruta Dorada" data-conservation="No en peligro">
-                <img src="imagenes/Fruta dorada.jpg" alt="Fruta Dorada" data-modal="modal43">
-                <p>Fruta dorada</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guácimo" data-conservation="No en peligro">
-                <img src="imagenes/Guácimo.jpg" alt="Guácimo" data-modal="modal44">
-                <p>Guácimo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Chilamate" data-conservation="No en peligro">
-                <img src="imagenes/Chilamate.jpg" alt="Chilamate" data-modal="modal45">
-                <p>Chilamate</p>
-            </div>
-            <div class="tree-card" data-tree-name="Ojoche" data-conservation="No en peligro">
-                <img src="imagenes/Ojoche.jpg" alt="Ojoche" data-modal="modal46">
-                <p>Ojoche</p>
-            </div>
-            <div class="tree-card" data-tree-name="Manú Plátano" data-conservation="No en peligro">
-                <img src="imagenes/Manú plátano.jpeg" alt="Manú Plátano" data-modal="modal47">
-                <p>Manú plátano</p>
-            </div>
-            <div class="tree-card" data-tree-name="Árbol Jicaro" data-conservation="No en peligro">
-                <img src="imagenes/Árbol jicaro.jpeg" alt="Árbol Jicaro" data-modal="modal48">
-                <p>Árbol jicaro</p>
-            </div>
-            <div class="tree-card" data-tree-name="Nance" data-conservation="No en peligro">
-                <img src="imagenes/Nance.jpg" alt="Nance" data-modal="modal49">
-                <p>Nance</p>
-            </div>
-            <div class="tree-card" data-tree-name="Caimito" data-conservation="No en peligro">
-                <img src="imagenes/Caimito.jpg" alt="Caimito" data-modal="modal50">
-                <p>Caimito</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guayabón" data-conservation="No en peligro">
-                <img src="imagenes/Guayabón.jpg" alt="Guayabón" data-modal="modal51">
-                <p>Guayabón</p>
-            </div>
-            <div class="tree-card" data-tree-name="Jobo Negro" data-conservation="No en peligro">
-                <img src="imagenes/Jobo negro.jpg" alt="Jobo Negro" data-modal="modal52">
-                <p>Jobo negro</p>
-            </div>
-            <div class="tree-card" data-tree-name="Pejibaye" data-conservation="No en peligro">
-                <img src="imagenes/pejibaye.jpeg" alt="Pejibaye" data-modal="modal53">
-                <p>Pejibaye</p>
-            </div>
-            <div class="tree-card" data-tree-name="Zapotillo" data-conservation="Sin datos específicos">
-                <img src="imagenes/Zapotillo.jpg" alt="Zapotillo" data-modal="modal54">
-                <p>Zapotillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Almendro de Río" data-conservation="No en peligro">
-                <img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" data-modal="modal55">
-                <p>Almendro de Río</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guanábana" data-conservation="No en peligro">
-                <img src="imagenes/Guanábana.jpeg" alt="Guanábana" data-modal="modal56">
-                <p>Guanábana</p>
-            </div>
-            <div class="tree-card" data-tree-name="Biribá" data-conservation="No en peligro">
-                <img src="imagenes/biribá.jpg" alt="Biribá" data-modal="modal57">
-                <p>Biribá</p>
-            </div>
-            <div class="tree-card" data-tree-name="Anonillo" data-conservation="Sin datos específicos">
-                <img src="imagenes/Anonillo.jpg" alt="Anonillo" data-modal="modal58">
-                <p>Anonillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Guayaba" data-conservation="No en peligro">
-                <img src="imagenes/Guayaba.jpg" alt="Guayaba" data-modal="modal59">
-                <p>Guayaba</p>
-            </div>
-            <div class="tree-card" data-tree-name="Manzana de Agua" data-conservation="No en peligro">
-                <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" data-modal="modal60">
-                <p>Manzana de Agua</p>
-            </div>
-            <div class="tree-card" data-tree-name="Mango" data-conservation="No en peligro">
-                <img src="imagenes/Mango.jpg" alt="Mango" data-modal="modal61">
-                <p>Mango</p>
-            </div>
-            <div class="tree-card" data-tree-name="Aguacate" data-conservation="No en peligro">
-                <img src="imagenes/Aguacate.JPG" alt="Aguacate" data-modal="modal62">
-                <p>Aguacate</p>
-            </div>
-            <div class="tree-card" data-tree-name="Balsa" data-conservation="No en peligro">
-                <img src="imagenes/Balsa.jpg" alt="Balsa" data-modal="modal63">
-                <p>Balsa</p>
-            </div>
-            <div class="tree-card" data-tree-name="Aguacatillo" data-conservation="No en peligro">
-                <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" data-modal="modal64">
-                <p>Aguacatillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Higuerón" data-conservation="No en peligro">
-                <img src="imagenes/Higuerón.jpg" alt="Higuerón" data-modal="modal65">
-                <p>Higuerón</p>
-            </div>
-            <div class="tree-card" data-tree-name="Achiote" data-conservation="No en peligro">
-                <img src="imagenes/Achiote.jpg" alt="Achiote" data-modal="modal66">
-                <p>Achiote</p>
-            </div>
-            <div class="tree-card" data-tree-name="Poró" data-conservation="Sin datos específicos">
-                <img src="imagenes/Poró.jpg" alt="Poró" data-modal="modal67">
-                <p>Poró</p>
-            </div>
-            <div class="tree-card" data-tree-name="Molenillo" data-conservation="Sin datos específicos">
-                <img src="imagenes/Molenillo.jpg" alt="Molenillo" data-modal="modal68">
-                <p>Molenillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Jabillo" data-conservation="No en peligro">
-                <img src="imagenes/Jabillo.jpg" alt="Jabillo" data-modal="modal70">
-                <p>Jabillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Árbol de Naranja" data-conservation="No en peligro">
-                <img src="imagenes/Árbol de Naranja.jpg" alt="Árbol de Naranja" data-modal="modal71">
-                <p>Árbol de Naranja</p>
-            </div>
-            <div class="tree-card" data-tree-name="Zapote" data-conservation="Vulnerable">
-                <img src="imagenes/Zapote.jpg" alt="Zapote" data-modal="modal72">
-                <p>Zapote</p>
-            </div>
-            <div class="tree-card" data-tree-name="Carboncillo" data-conservation="No en peligro">
-                <img src="imagenes/Carboncillo.jpg" alt="Carboncillo" data-modal="modal73">
-                <p>Carboncillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Palma Real" data-conservation="No en peligro">
-                <img src="imagenes/Palma real.jpg" alt="Palma Real" data-modal="modal74">
-                <p>Palma real</p>
-            </div>
-            <div class="tree-card" data-tree-name="Jobo" data-conservation="No en peligro">
-                <img src="imagenes/Jobo.jpg" alt="Jobo" data-modal="modal75">
-                <p>Jobo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Capulín" data-conservation="No en peligro">
-                <img src="imagenes/Capulín.jpg" alt="Capulín" data-modal="modal76">
-                <p>Capulín</p>
-            </div>
-            <div class="tree-card" data-tree-name="Membrillo" data-conservation="No en peligro">
-                <img src="imagenes/Menbrillo.jpg" alt="Membrillo" data-modal="modal77">
-                <p>Membrillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Teca" data-conservation="No en peligro">
-                <img src="imagenes/Teca.jpg" alt="Teca" data-modal="modal79">
-                <p>Teca</p>
-            </div>
-            <div class="tree-card" data-tree-name="Melina" data-conservation="No en peligro">
-                <img src="imagenes/Melina.jpg" alt="Melina" data-modal="modal80">
-                <p>Melina</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cucaracho" data-conservation="Sin datos específicos">
-                <img src="imagenes/Cucaracho.jpeg" alt="Cucaracho" data-modal="modal81">
-                <p>Cucaracho</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cocobolo" data-conservation="Vulnerable">
-                <img src="imagenes/Cocobolo.JPG" alt="Cocobolo" data-modal="modal82">
-                <p>Cocobolo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cristóbal" data-conservation="En peligro">
-                <img src="imagenes/Cristóbal.jpg" alt="Cristóbal" data-modal="modal83">
-                <p>Cristóbal</p>
-            </div>
-            <div class="tree-card" data-tree-name="Indio Desnudo" data-conservation="No en peligro">
-                <img src="imagenes/Indio Desnudo.jpg" alt="Indio Desnudo" data-modal="modal84">
-                <p>Indio Desnudo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Carao" data-conservation="No en peligro">
-                <img src="imagenes/Carao.jpg" alt="Carao" data-modal="modal85">
-                <p>Carao</p>
-            </div>
-            <div class="tree-card" data-tree-name="Laurel" data-conservation="No en peligro">
-                <img src="imagenes/Laurel.jpeg" alt="Laurel" data-modal="modal86">
-                <p>Laurel</p>
-            </div>
-            <div class="tree-card" data-tree-name="Caobilla" data-conservation="Vulnerable">
-                <img src="imagenes/Caobilla.jpg" alt="Caobilla" data-modal="modal87">
-                <p>Caobilla</p>
-            </div>
-            <div class="tree-card" data-tree-name="Fruta de Mono" data-conservation="No en peligro">
-                <img src="imagenes/Fruta de Mono.jpeg" alt="Fruta de Mono" data-modal="modal88">
-                <p>Fruta de Mono</p>
-            </div>
-            <div class="tree-card" data-tree-name="Jocote" data-conservation="No en peligro">
-                <img src="imagenes/Jocote.jpg" alt="Jocote" data-modal="modal89">
-                <p>Jocote</p>
-            </div>
-            <div class="tree-card" data-tree-name="Lagarto" data-conservation="En peligro">
-                <img src="imagenes/Lagarto.jpeg" alt="Lagarto" data-modal="modal90">
-                <p>Lagarto</p>
-            </div>
-            <div class="tree-card" data-tree-name="Cas" data-conservation="No en peligro">
-                <img src="imagenes/Cas.jpg" alt="Cas" data-modal="modal91">
-                <p>Cas</p>
-            </div>
-            <div class="tree-card" data-tree-name="Baco" data-conservation="No en peligro">
-                <img src="imagenes/Baco.jpg" alt="Baco" data-modal="modal92">
-                <p>Baco</p>
-            </div>
-            <div class="tree-card" data-tree-name="Costilla de Danta" data-conservation="No en peligro">
-                <img src="imagenes/Costilla de danta.jpg" alt="Costilla de Danta" data-modal="modal93">
-                <p>Costilla de danta</p>
-            </div>
-            <div class="tree-card" data-tree-name="Huevos de Caballo" data-conservation="Vulnerable">
-                <img src="imagenes/Huevos de caballo.jpeg" alt="Huevos de Caballo" data-modal="modal94">
-                <p>Huevos de caballo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Vainilla" data-conservation="No en peligro">
-                <img src="imagenes/Vainilla.jpg" alt="Vainilla" data-modal="modal95">
-                <p>Vainilla</p>
-            </div>
-            <div class="tree-card" data-tree-name="Pata de Yanki" data-conservation="Vulnerable">
-                <img src="imagenes/Pata de yanki.jpg" alt="Pata de Yanki" data-modal="modal96">
-                <p>Pata de yanki</p>
-            </div>
-            <div class="tree-card" data-tree-name="Mora" data-conservation="No en peligro">
-                <img src="imagenes/Mora.jpg" alt="Mora" data-modal="modal97">
-                <p>Mora</p>
-            </div>
-            <div class="tree-card" data-tree-name="Canelillo" data-conservation="En peligro">
-                <img src="imagenes/Canelillo.jpg" alt="Canelillo" data-modal="modal98">
-                <p>Canelillo</p>
-            </div>
-            <div class="tree-card" data-tree-name="Pilón" data-conservation="No en peligro">
-                <img src="imagenes/Pilón.jpg" alt="Pilón" data-modal="modal99">
-                <p>Pilón</p>
-            </div>
-            <div class="tree-card" data-tree-name="Marañón" data-conservation="No en peligro">
-                <img src="imagenes/Marañón.jpg" alt="Marañón" data-modal="modal100">
-                <p>Marañón</p>
+            <div id="tree-cards-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
             </div>
         </section>
-
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guinízaro o Elemí</h2>
-                <img src="imagenes/Amyris magnifolia.jpg" alt="Guinízaro o Elemí" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> RUTACEAE.</p>
-                <p><strong>Nombre Científico:</strong> Amyris Magnifolia.</p>
-            </div>
-        </div>
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ajo Negro</h2>
-                <img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo Negro" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Platymiscium Stipulare.</p>
-            </div>
-        </div>
-        <div id="modal3" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ron-Ron</h2>
-                <img src="imagenes/Ron-ron.jpg" alt="Ron-Ron" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dialium guianense.</p>
-            </div>
-        </div>
-        <div id="modal4" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ajillo - Ardillo</h2>
-                <img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dussia macroprophyllata.</p>
-            </div>
-        </div>
-        <div id="modal5" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Escobo</h2>
-                <img src="imagenes/Escobo.jpg" alt="Escobo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Lonchocarpus atropurpureus.</p>
-            </div>
-        </div>
-        <div id="modal6" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cascarillo</h2>
-                <img src="imagenes/Cascarillo.jpg" alt="Cascarillo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Combretaceae.</p>
-                <p><strong>Nombre Científico:</strong> Terminalia Amazonia.</p>
-            </div>
-        </div>
-        <div id="modal7" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Níspero</h2>
-                <img src="imagenes/Níspero.jpg" alt="Níspero" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Manilkara Chicle.</p>
-            </div>
-        </div>
-        <div id="modal8" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ceibo Barrigón</h2>
-                <img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo barrigón" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pseudobombax Septenatum.</p>
-            </div>
-        </div>
-        <div id="modal9" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ajo</h2>
-                <img src="imagenes/Ajo.jpg" alt="Ajo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Lonchocarpus Costaricensis.</p>
-            </div>
-        </div>
-        <div id="modal10" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cirri - Quira</h2>
-                <img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Quararibea Turbinata.</p>
-            </div>
-        </div>
-        <div id="modal11" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cedro Amargo</h2>
-                <img src="imagenes/Cedro amargo.jpg" alt="Cedro Amargo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Meliaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cedrela Odorata.</p>
-            </div>
-        </div>
-        <div id="modal12" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ceiba</h2>
-                <img src="imagenes/Ceiba.jpg" alt="Ceiba" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Ceiba Pentandra.</p>
-            </div>
-        </div>
-        <div id="modal13" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Camibar</h2>
-                <img src="imagenes/Camibar.jpg" alt="Camibar" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Myristicaceae.</p>
-                <p><strong>Nombre Científico:</strong> Virola Guatemalensis.</p>
-            </div>
-        </div>
-        <div id="modal14" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Copo Hediondo - Buriyon</h2>
-                <img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo Hediondo - Buriyon" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Euphorbiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Hura Crepitans.</p>
-            </div>
-        </div>
-        <div id="modal15" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Matasano</h2>
-                <img src="imagenes/Matasano.jpg" alt="Matasano" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Viridis.</p>
-            </div>
-        </div>
-        <div id="modal16" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guapinol Negro</h2>
-                <img src="imagenes/Guapinol negro.jpg" alt="Guapinol Negro" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Hymenaea Courbaril.</p>
-            </div>
-        </div>
-        <div id="modal17" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Carey</h2>
-                <img src="imagenes/Carey.jpg" alt="Carey" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Rutaceae.</p>
-                <p><strong>Nombre Científico:</strong> Zanthoxylum Microcarpum.</p>
-            </div>
-        </div>
-        <div id="modal18" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Corteza Amarillo</h2>
-                <img src="imagenes/Corteza amarillo.jpeg" alt="Corteza Amarillo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Bignoniaceae.</p>
-                <p><strong>Nombre Científico:</strong> Handroanthus Impetiginosus.</p>
-            </div>
-        </div>
-        <div id="modal19" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Naranjillo</h2>
-                <img src="imagenes/Naranjillo.jpg" alt="Naranjillo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Rutaceae.</p>
-                <p><strong>Nombre Científico:</strong> Tabernaemontana Amygdalifolia.</p>
-            </div>
-        </div>
-        <div id="modal20" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Chiricano Alegre</h2>
-                <img src="imagenes/Chiricano alegre.jpg" alt="Chiricano Alegre" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Swartzia Panamensis.</p>
-            </div>
-        </div>
-        <div id="modal21" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guaba</h2>
-                <img src="imagenes/Guaba.jpeg" alt="Guaba" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Inga Spectabilis.</p>
-            </div>
-        </div>
-        <div id="modal22" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Manu</h2>
-                <img src="imagenes/Manu.jpeg" alt="Manu" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dalbergia Retusa.</p>
-            </div>
-        </div>
-        <div id="modal23" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Mangle Nato</h2>
-                <img src="imagenes/Mangle nato.jpeg" alt="Mangle Nato" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Rubiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pelliciera Rhizophorae.</p>
-            </div>
-        </div>
-        <div id="modal24" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Sándalo</h2>
-                <img src="imagenes/Sandalo.jpg" alt="Sándalo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Santalaceae.</p>
-                <p><strong>Nombre Científico:</strong> Amapas Concolor.</p>
-            </div>
-        </div>
-        <div id="modal25" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guarumo</h2>
-                <img src="imagenes/Guarumo.jpg" alt="Guarumo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Urticaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cecropia Obtusifolia.</p>
-            </div>
-        </div>
-        <div id="modal26" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ocotea</h2>
-                <img src="imagenes/Ocotea.jpg" alt="Ocotea" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lauraceae.</p>
-                <p><strong>Nombre Científico:</strong> Ocotea Whitei.</p>
-            </div>
-        </div>
-        <div id="modal27" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Gavilán</h2>
-                <img src="imagenes/Gavilán.jpg" alt="Gavilán" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pentaclethra Macroloba.</p>
-            </div>
-        </div>
-        <div id="modal28" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Sangrillo</h2>
-                <img src="imagenes/Sangrillo.jpg" alt="Sangrillo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Euphorbiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pterocarpus Officinalis.</p>
-            </div>
-        </div>
-        <div id="modal29" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guanacastillo - Ardillo - Tamarindón</h2>
-                <img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Enterolobium Cyclocarpum.</p>
-            </div>
-        </div>
-        <div id="modal30" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cachimbo</h2>
-                <img src="imagenes/Cachimbo.jpg" alt="Cachimbo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Erythrina Poeppigiana.</p>
-            </div>
-        </div>
-        <div id="modal31" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Pinillo</h2>
-                <img src="imagenes/Pinillo.jpeg" alt="Pinillo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Podocarpaceae.</p>
-                <p><strong>Nombre Científico:</strong> Podocarpus Oleifolius.</p>
-            </div>
-        </div>
-        <div id="modal32" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cativo</h2>
-                <img src="imagenes/Cativo.jpeg" alt="Cativo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Prioria Copaifera.</p>
-            </div>
-        </div>
-        <div id="modal33" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Iguano</h2>
-                <img src="imagenes/Iguano.jpg" alt="Iguano" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Ulmaceae.</p>
-                <p><strong>Nombre Científico:</strong> Trema Micrantha.</p>
-            </div>
-        </div>
-        <div id="modal34" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guachipelín</h2>
-                <img src="imagenes/Guachipelín.jpg" alt="Guachipelín" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Diphysa Americana.</p>
-            </div>
-        </div>
-        <div id="modal35" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cedro Caracolito</h2>
-                <img src="imagenes/Cedro caracolito.jpg" alt="Cedro Caracolito" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Meliaceae.</p>
-                <p><strong>Nombre Científico:</strong> Trichilia Tuberculata.</p>
-            </div>
-        </div>
-        <div id="modal36" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Reseco - Alazan</h2>
-                <img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dipteryx Oleifera.</p>
-            </div>
-        </div>
-        <div id="modal37" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Tamarindo - Almendro</h2>
-                <img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Tamarindus Indica.</p>
-            </div>
-        </div>
-        <div id="modal38" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Nazareno</h2>
-                <img src="imagenes/nazareno.jpg" alt="Nazareno" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Peltogyne Purpurea.</p>
-            </div>
-        </div>
-        <div id="modal39" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Hule</h2>
-                <img src="imagenes/Hule.jpg" alt="Hule" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Euphorbiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Hevea Brasiliensis.</p>
-            </div>
-        </div>
-        <div id="modal40" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cacao</h2>
-                <img src="imagenes/cacao.png" alt="Cacao" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Theobroma Cacao.</p>
-            </div>
-        </div>
-        <div id="modal41" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Níspero Zapote</h2>
-                <img src="imagenes/Níspero zapote.jpg" alt="Níspero zapote" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Sapota.</p>
-            </div>
-        </div>
-        <div id="modal42" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Bongo</h2>
-                <img src="imagenes/bongo.jpeg" alt="Bongo" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cavanillesia Platanifolia.</p>
-            </div>
-        </div>
-        <div id="modal43" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Fruta Dorada</h2>
-                <img src="imagenes/Fruta dorada.jpg" alt="Fruta Dorada" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cochlospermum Vitifolium.</p>
-            </div>
-        </div>
-        <div id="modal44" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guácimo</h2>
-                <img src="imagenes/Guácimo.jpg" alt="Guácimo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Guazuma Ulmifolia.</p>
-            </div>
-        </div>
-        <div id="modal45" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Chilamate</h2>
-                <img src="imagenes/Chilamate.jpg" alt="Chilamate" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Ficus Insipida.</p>
-            </div>
-        </div>
-        <div id="modal46" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Ojoche</h2>
-                <img src="imagenes/Ojoche.jpg" alt="Ojoche" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Brosimum Alicastrum.</p>
-            </div>
-        </div>
-        <div id="modal47" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Manú Plátano</h2>
-                <img src="imagenes/Manú plátano.jpeg" alt="Manú plátano" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Platymiscium Pinnatum.</p>
-            </div>
-        </div>
-        <div id="modal48" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Árbol Jicaro</h2>
-                <img src="imagenes/Árbol jicaro.jpeg" alt="Árbol Jicaro" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Bignoniaceae.</p>
-                <p><strong>Nombre Científico:</strong> Crescentia Alata.</p>
-            </div>
-        </div>
-        <div id="modal49" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Nance</h2>
-                <img src="imagenes/Nance.jpg" alt="Nance" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malpighiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Byrsonima Crassifolia.</p>
-            </div>
-        </div>
-        <div id="modal50" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Caimito</h2>
-                <img src="imagenes/Caimito.jpg" alt="Caimito" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Chrysophyllum Cainito.</p>
-            </div>
-        </div>
-        <div id="modal51" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guayabón</h2>
-                <img src="imagenes/Guayabón.jpg" alt="Guayabón" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dialium Guianense.</p>
-            </div>
-        </div>
-        <div id="modal52" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Jobo Negro</h2>
-                <img src="imagenes/Jobo negro.jpg" alt="Jobo Negro" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Anacardiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Spondias Mombin.</p>
-            </div>
-        </div>
-        <div id="modal53" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Pejibaye</h2>
-                <img src="imagenes/pejibaye.jpeg" alt="Pejibaye" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Arecaceae.</p>
-                <p><strong>Nombre Científico:</strong> Bactris Gasipaes.</p>
-            </div>
-        </div>
-        <div id="modal54" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Zapotillo</h2>
-                <img src="imagenes/Zapotillo.jpg" alt="Zapotillo" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Campechiana.</p>
-            </div>
-        </div>
-        <div id="modal55" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Almendro de Río</h2>
-                <img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Combretaceae.</p>
-                <p><strong>Nombre Científico:</strong> Terminalia Catappa.</p>
-            </div>
-        </div>
-        <div id="modal56" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guanábana</h2>
-                <img src="imagenes/Guanábana.jpeg" alt="Guanábana" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Annonaceae.</p>
-                <p><strong>Nombre Científico:</strong> Annona Muricata.</p>
-            </div>
-        </div>
-        <div id="modal57" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Biribá</h2>
-                <img src="imagenes/biribá.jpg" alt="Biribá" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Annonaceae.</p>
-                <p><strong>Nombre Científico:</strong> Rollinia Deliciosa.</p>
-            </div>
-        </div>
-        <div id="modal58" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Anonillo</h2>
-                <img src="imagenes/Anonillo.jpg" alt="Anonillo" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Annonaceae.</p>
-                <p><strong>Nombre Científico:</strong> Annona Purpurea.</p>
-            </div>
-        </div>
-        <div id="modal59" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Guayaba</h2>
-                <img src="imagenes/Guayaba.jpg" alt="Guayaba" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Myrtaceae.</p>
-                <p><strong>Nombre Científico:</strong> Psidium Guajava.</p>
-            </div>
-        </div>
-        <div id="modal60" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Manzana de Agua</h2>
-                <img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Myrtaceae.</p>
-                <p><strong>Nombre Científico:</strong> Syzygium Malaccense.</p>
-            </div>
-        </div>
-        <div id="modal61" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Mango</h2>
-                <img src="imagenes/Mango.jpg" alt="Mango" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Anacardiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Mangifera Indica.</p>
-            </div>
-        </div>
-        <div id="modal62" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Aguacate</h2>
-                <img src="imagenes/Aguacate.JPG" alt="Aguacate" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lauraceae.</p>
-                <p><strong>Nombre Científico:</strong> Persea Americana.</p>
-            </div>
-        </div>
-        <div id="modal63" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Balsa</h2>
-                <img src="imagenes/Balsa.jpg" alt="Balsa" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Ochroma Pyramidale.</p>
-            </div>
-        </div>
-        <div id="modal64" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Aguacatillo</h2>
-                <img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lauraceae.</p>
-                <p><strong>Nombre Científico:</strong> Persea Borbonia.</p>
-            </div>
-        </div>
-        <div id="modal65" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Higuerón</h2>
-                <img src="imagenes/Higuerón.jpg" alt="Higuerón" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Ficus Benjamina.</p>
-            </div>
-        </div>
-        <div id="modal66" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Achiote</h2>
-                <img src="imagenes/Achiote.jpg" alt="Achiote" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Bixaceae.</p>
-                <p><strong>Nombre Científico:</strong> Bixa Orellana.</p>
-            </div>
-        </div>
-        <div id="modal67" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Poró</h2>
-                <img src="imagenes/Poró.jpg" alt="Poró" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Erythrina Fusca.</p>
-            </div>
-        </div>
-        <div id="modal68" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Molenillo</h2>
-                <img src="imagenes/Molenillo.jpg" alt="Molenillo" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Machaerium Capote.</p>
-            </div>
-        </div>
-        <div id="modal70" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Jabillo</h2>
-                <img src="imagenes/Jabillo.jpg" alt="Jabillo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Euphorbiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Hura Polyandra.</p>
-            </div>
-        </div>
-        <div id="modal71" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Árbol de Naranja</h2>
-                <img src="imagenes/Árbol de Naranja.jpg" alt="Árbol de Naranja" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Rutaceae.</p>
-                <p><strong>Nombre Científico:</strong> Citrus Sinensis.</p>
-            </div>
-        </div>
-        <div id="modal72" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Zapote</h2>
-                <img src="imagenes/Zapote.jpg" alt="Zapote" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Mammosa.</p>
-            </div>
-        </div>
-        <div id="modal73" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Carboncillo</h2>
-                <img src="imagenes/Carboncillo.jpg" alt="Carboncillo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Calliandra Calothyrsus.</p>
-            </div>
-        </div>
-        <div id="modal74" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Palma Real</h2>
-                <img src="imagenes/Palma real.jpg" alt="Palma real" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Arecaceae.</p>
-                <p><strong>Nombre Científico:</strong> Roystonea Oleracea.</p>
-            </div>
-        </div>
-        <div id="modal75" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Jobo</h2>
-                <img src="imagenes/Jobo.jpg" alt="Jobo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Anacardiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Spondias Mombin.</p>
-            </div>
-        </div>
-        <div id="modal76" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Capulín</h2>
-                <img src="imagenes/Capulín.jpg" alt="Capulín" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Rosaceae.</p>
-                <p><strong>Nombre Científico:</strong> Prunus Serotina.</p>
-            </div>
-        </div>
-        <div id="modal77" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Membrillo</h2>
-                <img src="imagenes/Menbrillo.jpg" alt="Membrillo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Rosaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cydonia Oblonga.</p>
-            </div>
-        </div>
-        <div id="modal79" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Teca</h2>
-                <img src="imagenes/Teca.jpg" alt="Teca" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lamiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Tectona Grandis.</p>
-            </div>
-        </div>
-        <div id="modal80" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Melina</h2>
-                <img src="imagenes/Melina.jpg" alt="Melina" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lamiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Gmelina Arborea.</p>
-            </div>
-        </div>
-        <div id="modal81" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cucaracho</h2>
-                <img src="imagenes/Cucaracho.jpeg" alt="Cucaracho" class="modal-img">
-                <p><strong>Estado:</strong> Sin datos específicos.</p>
-                <p><strong>Familia:</strong> Rubiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Alibertia Edulis.</p>
-            </div>
-        </div>
-        <div id="modal82" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cocobolo</h2>
-                <img src="imagenes/Cocobolo.JPG" alt="Cocobolo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Dalbergia Retusa.</p>
-            </div>
-        </div>
-        <div id="modal83" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cristóbal</h2>
-                <img src="imagenes/Cristóbal.jpg" alt="Cristóbal" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Platymiscium Pinnatum.</p>
-            </div>
-        </div>
-        <div id="modal84" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Indio Desnudo</h2>
-                <img src="imagenes/Indio Desnudo.jpg" alt="Indio Desnudo" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Burseraceae.</p>
-                <p><strong>Nombre Científico:</strong> Bursera Simaruba.</p>
-            </div>
-        </div>
-        <div id="modal85" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Carao</h2>
-                <img src="imagenes/Carao.jpg" alt="Carao" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Cassia Grandis.</p>
-            </div>
-        </div>
-        <div id="modal86" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Laurel</h2>
-                <img src="imagenes/Laurel.jpeg" alt="Laurel" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Lauraceae.</p>
-                <p><strong>Nombre Científico:</strong> Cordia Alliodora.</p>
-            </div>
-        </div>
-        <div id="modal87" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Caobilla</h2>
-                <img src="imagenes/Caobilla.jpg" alt="Caobilla" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Meliaceae.</p>
-                <p><strong>Nombre Científico:</strong> Carapa Guianensis.</p>
-            </div>
-        </div>
-        <div id="modal88" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Fruta de Mono</h2>
-                <img src="imagenes/Fruta de Mono.jpeg" alt="Fruta de Mono" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Annonaceae.</p>
-                <p><strong>Nombre Científico:</strong> Annona Glabra.</p>
-            </div>
-        </div>
-        <div id="modal89" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Jocote</h2>
-                <img src="imagenes/Jocote.jpg" alt="Jocote" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Anacardiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Spondias Purpurea.</p>
-            </div>
-        </div>
-        <div id="modal90" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Lagarto</h2>
-                <img src="imagenes/Lagarto.jpeg" alt="Lagarto" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Lacmellea Panamensis.</p>
-            </div>
-        </div>
-        <div id="modal91" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Cas</h2>
-                <img src="imagenes/Cas.jpg" alt="Cas" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Myrtaceae.</p>
-                <p><strong>Nombre Científico:</strong> Psidium Friedrichsthalianum.</p>
-            </div>
-        </div>
-        <div id="modal92" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Baco</h2>
-                <img src="imagenes/Baco.jpg" alt="Baco" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Multiflora.</p>
-            </div>
-        </div>
-        <div id="modal93" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Costilla de Danta</h2>
-                <img src="imagenes/Costilla de danta.jpg" alt="Costilla de Danta" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Ficus Costaricana.</p>
-            </div>
-        </div>
-        <div id="modal94" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Huevos de Caballo</h2>
-                <img src="imagenes/Huevos de caballo.jpeg" alt="Huevos de Caballo" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Malvaceae.</p>
-                <p><strong>Nombre Científico:</strong> Sterculia Apetala.</p>
-            </div>
-        </div>
-        <div id="modal95" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Vainilla</h2>
-                <img src="imagenes/Vainilla.jpg" alt="Vainilla" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Orchidaceae.</p>
-                <p><strong>Nombre Científico:</strong> Vanilla Planifolia.</p>
-            </div>
-        </div>
-        <div id="modal96" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Pata de Yanki</h2>
-                <img src="imagenes/Pata de yanki.jpg" alt="Pata de Yanki" class="modal-img">
-                <p><strong>Estado:</strong> Vulnerable.</p>
-                <p><strong>Familia:</strong> Fabaceae.</p>
-                <p><strong>Nombre Científico:</strong> Bauhinia Purpurea.</p>
-            </div>
-        </div>
-        <div id="modal97" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Mora</h2>
-                <img src="imagenes/Mora.jpg" alt="Mora" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Moraceae.</p>
-                <p><strong>Nombre Científico:</strong> Maclura Tinctoria.</p>
-            </div>
-        </div>
-        <div id="modal98" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Canelillo</h2>
-                <img src="imagenes/Canelillo.jpg" alt="Canelillo" class="modal-img">
-                <p><strong>Estado:</strong> En peligro.</p>
-                <p><strong>Familia:</strong> Lauraceae.</p>
-                <p><strong>Nombre Científico:</strong> Nectandra Reticulata.</p>
-            </div>
-        </div>
-        <div id="modal99" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Pilón</h2>
-                <img src="imagenes/Pilón.jpg" alt="Pilón" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Sapotaceae.</p>
-                <p><strong>Nombre Científico:</strong> Pouteria Dictyoneura.</p>
-            </div>
-        </div>
-        <div id="modal100" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Marañón</h2>
-                <img src="imagenes/Marañón.jpg" alt="Marañón" class="modal-img">
-                <p><strong>Estado:</strong> No en peligro.</p>
-                <p><strong>Familia:</strong> Anacardiaceae.</p>
-                <p><strong>Nombre Científico:</strong> Anacardium Occidentale.</p>
-            </div>
-        </div>
     </main>
 
-    <footer>
+    
+    <div id="tree-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg p-8 max-w-lg w-full shadow-2xl relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-3xl font-bold focus:outline-none">&times;</button>
+            <div class="text-center">
+                <img id="modal-tree-image" src="" alt="Imagen del Árbol" class="w-full h-64 object-cover rounded-lg mb-4 shadow-md">
+                <h3 id="modal-tree-name" class="text-3xl font-bold text-green-800 mb-2"></h3>
+                <p id="modal-tree-family" class="text-lg text-gray-700 mb-1"></p>
+                <p id="modal-tree-scientific-name" class="text-lg text-gray-700 mb-1 italic"></p>
+                <p id="modal-tree-status" class="text-xl font-semibold text-gray-800"></p>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="bg-gray-800 text-white p-4 text-center text-sm mt-8 rounded-t-lg shadow-inner"> 
         <p>&copy; 2025 Linked Leaves CR. Todos los derechos reservados.</p>
-        <p class="photo-credits">Todos los créditos a los autores que tomaron las fotos.</p>
+        <p>Todos los créditos a los autores que tomaron las fotos.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        
+        const trees = [
+            {
+                name: "Guinízaro o Elemí",
+                status: "Vulnerable",
+                family: "RUTACEAE",
+                scientificName: "Amyris Magnifolia",
+                imageCode: '<img src="imagenes/Amyris magnifolia.jpg" alt="Guinízaro o Elemí" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ajo negro - Cascarillo", 
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Platymiscium Stipulare",
+                imageCode: '<img src="imagenes/Ajo negro - Cascarillo.jpg" alt="Ajo Negro - Cascarillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ron-Ron",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Dialium Guianense",
+                imageCode: '<img src="imagenes/Ron-ron.jpg" alt="Ron-Ron" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ajillo - Ardillo",
+                status: "Vulnerable",
+                family: "Fabaceae",
+                scientificName: "Dussia Macroprophyllata",
+                imageCode: '<img src="imagenes/Ajillo - Ardillo.jpeg" alt="Ajillo - Ardillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Escobo",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Lonchocarpus Atropurpureus",
+                imageCode: '<img src="imagenes/Escobo.jpg" alt="Escobo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cascarillo",
+                status: "Vulnerable",
+                family: "Combretaceae",
+                scientificName: "Terminalia Amazonia",
+                imageCode: '<img src="imagenes/Cascarillo.jpg" alt="Cascarillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Níspero",
+                status: "Vulnerable",
+                family: "Sapotaceae",
+                scientificName: "Manilkara Chicle",
+                imageCode: '<img src="imagenes/Níspero.jpg" alt="Níspero" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ceibo Barrigón", 
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Pseudobombax Septenatum",
+                imageCode: '<img src="imagenes/Ceibo barrigón.jpg" alt="Ceibo Barrigón" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ajo",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Lonchocarpus Costaricensis",
+                imageCode: '<img src="imagenes/Ajo.jpg" alt="Ajo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cirri - Quira",
+                status: "En peligro",
+                family: "Malvaceae",
+                scientificName: "Quararibea Turbinata",
+                imageCode: '<img src="imagenes/Cirri - Quira.jpg" alt="Cirri - Quira" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cedro amargo", 
+                status: "Vulnerable",
+                family: "Meliaceae",
+                scientificName: "Cedrela Odorata",
+                imageCode: '<img src="imagenes/Cedro amargo.jpg" alt="Cedro Amargo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ceiba",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Ceiba Pentandra",
+                imageCode: '<img src="imagenes/Ceiba.jpg" alt="Ceiba" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Camibar",
+                status: "En peligro",
+                family: "Myristicaceae",
+                scientificName: "Virola Guatemalensis",
+                imageCode: '<img src="imagenes/Camibar.jpg" alt="Camibar" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Copo hediondo - Buriyon", 
+                status: "Vulnerable",
+                family: "Euphorbiaceae",
+                scientificName: "Hura Crepitans",
+                imageCode: '<img src="imagenes/Copo hediondo - Buriyon.jpeg" alt="Copo Hediondo - Buriyon" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Matasano",
+                status: "En peligro",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Viridis",
+                imageCode: '<img src="imagenes/Matasano.jpg" alt="Matasano" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guapinol negro", 
+                status: "No en peligro",
+                family: "Fabaceae",
+                scientificName: "Hymenaea Courbaril",
+                imageCode: '<img src="imagenes/Guapinol negro.jpg" alt="Guapinol Negro" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Carey",
+                status: "Vulnerable",
+                family: "Rutaceae",
+                scientificName: "Zanthoxylum Microcarpum",
+                imageCode: '<img src="imagenes/Carey.jpg" alt="Carey" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Corteza amarillo", // Updated name
+                status: "Vulnerable",
+                family: "Bignoniaceae",
+                scientificName: "Handroanthus Impetiginosus",
+                imageCode: '<img src="imagenes/Corteza amarillo.jpeg" alt="Corteza Amarillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Naranjillo",
+                status: "Vulnerable",
+                family: "Rutaceae",
+                scientificName: "Tabernaemontana Amygdalifolia",
+                imageCode: '<img src="imagenes/Naranjillo.jpg" alt="Naranjillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Chiricano Alegre",
+                status: "Vulnerable",
+                family: "Fabaceae",
+                scientificName: "Swartzia Panamensis",
+                imageCode: '<img src="imagenes/Chiricano alegre.jpg" alt="Chiricano Alegre" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guaba",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Inga Spectabilis",
+                imageCode: '<img src="imagenes/Guaba.jpeg" alt="Guaba" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Manu",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Dalbergia Retusa",
+                imageCode: '<img src="imagenes/Manu.jpeg" alt="Manu" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Mangle Nato",
+                status: "Vulnerable",
+                family: "Rubiaceae",
+                scientificName: "Pelliciera Rhizophorae",
+                imageCode: '<img src="imagenes/Mangle nato.jpeg" alt="Mangle Nato" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Sándalo",
+                status: "En peligro",
+                family: "Santalaceae",
+                scientificName: "Amapas Concolor",
+                imageCode: '<img src="imagenes/Sandalo.jpg" alt="Sándalo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guarumo",
+                status: "No en peligro",
+                family: "Urticaceae",
+                scientificName: "Cecropia Obtusifolia",
+                imageCode: '<img src="imagenes/Guarumo.jpg" alt="Guarumo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ocotea",
+                status: "No en peligro",
+                family: "Lauraceae",
+                scientificName: "Ocotea Whitei",
+                imageCode: '<img src="imagenes/Ocotea.jpg" alt="Ocotea" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Gavilán",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Pentaclethra Macroloba",
+                imageCode: '<img src="imagenes/Gavilán.jpg" alt="Gavilán" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Sangrillo",
+                status: "En peligro",
+                family: "Euphorbiaceae",
+                scientificName: "Pterocarpus Officinalis",
+                imageCode: '<img src="imagenes/Sangrillo.jpg" alt="Sangrillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guanacastillo - Ardillo - Tamarindón",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Enterolobium Cyclocarpum",
+                imageCode: '<img src="imagenes/Guanacastillo - Ardillo - Tamarindón.jpg" alt="Guanacastillo - Ardillo - Tamarindón" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cachimbo",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Erythrina Poeppigiana",
+                imageCode: '<img src="imagenes/Cachimbo.jpg" alt="Cachimbo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Pinillo",
+                status: "En peligro",
+                family: "Podocarpaceae",
+                scientificName: "Podocarpus Oleifolius",
+                imageCode: '<img src="imagenes/Pinillo.jpeg" alt="Pinillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cativo",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Prioria Copaifera",
+                imageCode: '<img src="imagenes/Cativo.jpeg" alt="Cativo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Iguano",
+                status: "Sin datos específicos",
+                family: "Ulmaceae",
+                scientificName: "Trema Micrantha",
+                imageCode: '<img src="imagenes/Iguano.jpg" alt="Iguano" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guachipelín",
+                status: "Sin datos específicos",
+                family: "Fabaceae",
+                scientificName: "Diphysa Americana",
+                imageCode: '<img src="imagenes/Guachipelín.jpg" alt="Guachipelín" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cedro Caracolito",
+                status: "Sin datos específicos",
+                family: "Meliaceae",
+                scientificName: "Trichilia Tuberculata",
+                imageCode: '<img src="imagenes/Cedro caracolito.jpg" alt="Cedro Caracolito" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Reseco - Alazan",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Dipteryx Oleifera",
+                imageCode: '<img src="imagenes/Reseco - Alazan.jpeg" alt="Reseco - Alazan" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Tamarindo - Almendro",
+                status: "No en peligro",
+                family: "Fabaceae",
+                scientificName: "Tamarindus Indica",
+                imageCode: '<img src="imagenes/Tamarindo - Almendro.jpg" alt="Tamarindo - Almendro" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Nazareno",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Peltogyne Purpurea",
+                imageCode: '<img src="imagenes/nazareno.jpg" alt="Nazareno" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Hule",
+                status: "No en peligro",
+                family: "Euphorbiaceae",
+                scientificName: "Hevea Brasiliensis",
+                imageCode: '<img src="imagenes/Hule.jpg" alt="Hule" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cacao",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Theobroma Cacao",
+                imageCode: '<img src="imagenes/cacao.png" alt="Cacao" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Níspero Zapote",
+                status: "Sin datos específicos",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Sapota",
+                imageCode: '<img src="imagenes/Níspero zapote.jpg" alt="Níspero Zapote" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Bongo",
+                status: "Sin datos específicos",
+                family: "Malvaceae",
+                scientificName: "Cavanillesia Platanifolia",
+                imageCode: '<img src="imagenes/bongo.jpeg" alt="Bongo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Fruta Dorada",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Cochlospermum Vitifolium",
+                imageCode: '<img src="imagenes/Fruta dorada.jpg" alt="Fruta Dorada" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guácimo",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Guazuma Ulmifolia",
+                imageCode: '<img src="imagenes/Guácimo.jpg" alt="Guácimo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Chilamate",
+                status: "No en peligro",
+                family: "Moraceae",
+                scientificName: "Ficus Insipida",
+                imageCode: '<img src="imagenes/Chilamate.jpg" alt="Chilamate" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Ojoche",
+                status: "No en peligro",
+                family: "Moraceae",
+                scientificName: "Brosimum Alicastrum",
+                imageCode: '<img src="imagenes/Ojoche.jpg" alt="Ojoche" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Manú Plátano",
+                status: "No en peligro",
+                family: "Fabaceae",
+                scientificName: "Platymiscium Pinnatum",
+                imageCode: '<img src="imagenes/Manú plátano.jpeg" alt="Manú Plátano" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Árbol Jicaro",
+                status: "No en peligro",
+                family: "Bignoniaceae",
+                scientificName: "Crescentia Alata",
+                imageCode: '<img src="imagenes/Árbol jicaro.jpeg" alt="Árbol Jicaro" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Nance",
+                status: "No en peligro",
+                family: "Malpighiaceae",
+                scientificName: "Byrsonima Crassifolia",
+                imageCode: '<img src="imagenes/Nance.jpg" alt="Nance" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Caimito",
+                status: "No en peligro",
+                family: "Sapotaceae",
+                scientificName: "Chrysophyllum Cainito",
+                imageCode: '<img src="imagenes/Caimito.jpg" alt="Caimito" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guayabón",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Dialium Guianense",
+                imageCode: '<img src="imagenes/Guayabón.jpg" alt="Guayabón" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Jobo Negro",
+                status: "No en peligro",
+                family: "Anacardiaceae",
+                scientificName: "Spondias Mombin",
+                imageCode: '<img src="imagenes/Jobo negro.jpg" alt="Jobo Negro" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Pejibaye",
+                status: "No en peligro",
+                family: "Arecaceae",
+                scientificName: "Bactris Gasipaes",
+                imageCode: '<img src="imagenes/pejibaye.jpeg" alt="Pejibaye" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Zapotillo",
+                status: "Sin datos específicos",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Campechiana",
+                imageCode: '<img src="imagenes/Zapotillo.jpg" alt="Zapotillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Almendro de Río",
+                status: "No en peligro",
+                family: "Combretaceae",
+                scientificName: "Terminalia Catappa",
+                imageCode: '<img src="imagenes/Almendro de Río.jpg" alt="Almendro de Río" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guanábana",
+                status: "No en peligro",
+                family: "Annonaceae",
+                scientificName: "Annona Muricata",
+                imageCode: '<img src="imagenes/Guanábana.jpeg" alt="Guanábana" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Biribá",
+                status: "No en peligro",
+                family: "Annonaceae",
+                scientificName: "Rollinia Deliciosa",
+                imageCode: '<img src="imagenes/biribá.jpg" alt="Biribá" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Anonillo",
+                status: "Sin datos específicos",
+                family: "Annonaceae",
+                scientificName: "Annona Purpurea",
+                imageCode: '<img src="imagenes/Anonillo.jpg" alt="Anonillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Guayaba",
+                status: "No en peligro",
+                family: "Myrtaceae",
+                scientificName: "Psidium Guajava",
+                imageCode: '<img src="imagenes/Guayaba.jpg" alt="Guayaba" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Manzana de Agua",
+                status: "No en peligro",
+                family: "Myrtaceae",
+                scientificName: "Syzygium Malaccense",
+                imageCode: '<img src="imagenes/Manzana de Agua.jpg" alt="Manzana de Agua" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Mango",
+                status: "No en peligro",
+                family: "Anacardiaceae",
+                scientificName: "Mangifera Indica",
+                imageCode: '<img src="imagenes/Mango.jpg" alt="Mango" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Aguacate",
+                status: "No en peligro",
+                family: "Lauraceae",
+                scientificName: "Persea Americana",
+                imageCode: '<img src="imagenes/Aguacate.JPG" alt="Aguacate" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Balsa",
+                status: "No en peligro",
+                family: "Malvaceae",
+                scientificName: "Ochroma Pyramidale",
+                imageCode: '<img src="imagenes/Balsa.jpg" alt="Balsa" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Aguacatillo",
+                status: "No en peligro",
+                family: "Lauraceae",
+                scientificName: "Persea Borbonia",
+                imageCode: '<img src="imagenes/Aguacatillo.jpg" alt="Aguacatillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Higuerón", 
+                status: "No en peligro",
+                family: "Moraceae", 
+                scientificName: "Ficus sp.", 
+                imageCode: '<img src="imagenes/Higuerón.jpg" alt="Higuerón" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Achiote",
+                status: "No en peligro",
+                family: "Bixaceae",
+                scientificName: "Bixa Orellana",
+                imageCode: '<img src="imagenes/Achiote.jpg" alt="Achiote" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Poró",
+                status: "Sin datos específicos",
+                family: "Fabaceae",
+                scientificName: "Erythrina Fusca",
+                imageCode: '<img src="imagenes/Poró.jpg" alt="Poró" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Molenillo",
+                status: "Sin datos específicos",
+                family: "Fabaceae",
+                scientificName: "Machaerium Capote",
+                imageCode: '<img src="imagenes/Molenillo.jpg" alt="Molenillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Jabillo",
+                status: "No en peligro",
+                family: "Euphorbiaceae",
+                scientificName: "Hura Polyandra",
+                imageCode: '<img src="imagenes/Jabillo.jpg" alt="Jabillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Árbol de Naranja",
+                status: "No en peligro",
+                family: "Rutaceae",
+                scientificName: "Citrus Sinensis",
+                imageCode: '<img src="imagenes/Árbol de Naranja.jpg" alt="Árbol de Naranja" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Zapote",
+                status: "Vulnerable",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Mammosa",
+                imageCode: '<img src="imagenes/Zapote.jpg" alt="Zapote" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Carboncillo",
+                status: "No en peligro",
+                family: "Fabaceae",
+                scientificName: "Calliandra Calothyrsus",
+                imageCode: '<img src="imagenes/Carboncillo.jpg" alt="Carboncillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Palma Real",
+                status: "No en peligro",
+                family: "Arecaceae",
+                scientificName: "Roystonea Oleracea",
+                imageCode: '<img src="imagenes/Palma real.jpg" alt="Palma Real" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Jobo",
+                status: "No en peligro",
+                family: "Anacardiaceae",
+                scientificName: "Spondias Mombin",
+                imageCode: '<img src="imagenes/Jobo.jpg" alt="Jobo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Capulín",
+                status: "No en peligro",
+                family: "Rosaceae",
+                scientificName: "Prunus Serotina",
+                imageCode: '<img src="imagenes/Capulín.jpg" alt="Capulín" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Membrillo",
+                status: "No en peligro",
+                family: "Rosaceae",
+                scientificName: "Cydonia Oblonga",
+                imageCode: '<img src="imagenes/Menbrillo.jpg" alt="Membrillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Teca",
+                status: "No en peligro",
+                family: "Lamiaceae",
+                scientificName: "Tectona Grandis",
+                imageCode: '<img src="imagenes/Teca.jpg" alt="Teca" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Melina",
+                status: "No en peligro",
+                family: "Lamiaceae",
+                scientificName: "Gmelina Arborea",
+                imageCode: '<img src="imagenes/Melina.jpg" alt="Melina" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cucaracho",
+                status: "Sin datos específicos",
+                family: "Rubiaceae",
+                scientificName: "Alibertia Edulis",
+                imageCode: '<img src="imagenes/Cucaracho.jpeg" alt="Cucaracho" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cocobolo",
+                status: "Vulnerable",
+                family: "Fabaceae",
+                scientificName: "Dalbergia Retusa",
+                imageCode: '<img src="imagenes/Cocobolo.JPG" alt="Cocobolo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cristóbal",
+                status: "En peligro",
+                family: "Fabaceae",
+                scientificName: "Platymiscium Pinnatum",
+                imageCode: '<img src="imagenes/Cristóbal.jpg" alt="Cristóbal" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Indio Desnudo",
+                status: "No en peligro",
+                family: "Burseraceae",
+                scientificName: "Bursera Simaruba",
+                imageCode: '<img src="imagenes/Indio Desnudo.jpg" alt="Indio Desnudo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Carao",
+                status: "No en peligro",
+                family: "Fabaceae",
+                scientificName: "Cassia Grandis",
+                imageCode: '<img src="imagenes/Carao.jpg" alt="Carao" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Laurel",
+                status: "No en peligro",
+                family: "Lauraceae",
+                scientificName: "Cordia Alliodora",
+                imageCode: '<img src="imagenes/Laurel.jpeg" alt="Laurel" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Caobilla",
+                status: "Vulnerable",
+                family: "Meliaceae",
+                scientificName: "Carapa Guianensis",
+                imageCode: '<img src="imagenes/Caobilla.jpg" alt="Caobilla" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Fruta de Mono",
+                status: "No en peligro",
+                family: "Annonaceae",
+                scientificName: "Annona Glabra",
+                imageCode: '<img src="imagenes/Fruta de Mono.jpeg" alt="Fruta de Mono" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Jocote",
+                status: "No en peligro",
+                family: "Anacardiaceae",
+                scientificName: "Spondias Purpurea",
+                imageCode: '<img src="imagenes/Jocote.jpg" alt="Jocote" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Lagarto",
+                status: "En peligro",
+                family: "Moraceae",
+                scientificName: "Lacmellea Panamensis",
+                imageCode: '<img src="imagenes/Lagarto.jpeg" alt="Lagarto" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Cas",
+                status: "No en peligro",
+                family: "Myrtaceae",
+                scientificName: "Psidium Friedrichsthalianum",
+                imageCode: '<img src="imagenes/Cas.jpg" alt="Cas" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Baco",
+                status: "No en peligro",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Multiflora",
+                imageCode: '<img src="imagenes/Baco.jpg" alt="Baco" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Costilla de Danta",
+                status: "No en peligro",
+                family: "Moraceae",
+                scientificName: "Ficus Costaricana",
+                imageCode: '<img src="imagenes/Costilla de danta.jpg" alt="Costilla de Danta" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Huevos de Caballo",
+                status: "Vulnerable",
+                family: "Malvaceae",
+                scientificName: "Sterculia Apetala",
+                imageCode: '<img src="imagenes/Huevos de caballo.jpeg" alt="Huevos de Caballo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Vainilla",
+                status: "No en peligro",
+                family: "Orchidaceae",
+                scientificName: "Vanilla Planifolia",
+                imageCode: '<img src="imagenes/Vainilla.jpg" alt="Vainilla" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Pata de Yanki",
+                status: "Vulnerable",
+                family: "Fabaceae",
+                scientificName: "Bauhinia Purpurea",
+                imageCode: '<img src="imagenes/Pata de yanki.jpg" alt="Pata de Yanki" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Mora",
+                status: "No en peligro",
+                family: "Moraceae",
+                scientificName: "Maclura Tinctoria",
+                imageCode: '<img src="imagenes/Mora.jpg" alt="Mora" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Canelillo",
+                status: "En peligro",
+                family: "Lauraceae",
+                scientificName: "Nectandra Reticulata",
+                imageCode: '<img src="imagenes/Canelillo.jpg" alt="Canelillo" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Pilón",
+                status: "No en peligro",
+                family: "Sapotaceae",
+                scientificName: "Pouteria Dictyoneura",
+                imageCode: '<img src="imagenes/Pilón.jpg" alt="Pilón" class="w-full h-48 object-cover rounded-t-lg">'
+            },
+            {
+                name: "Marañón",
+                status: "No en peligro",
+                family: "Anacardiaceae",
+                scientificName: "Anacardium Occidentale",
+                imageCode: '<img src="imagenes/Marañón.jpg" alt="Marañón" class="w-full h-48 object-cover rounded-t-lg">'
+            }
+        ];
 
+        const treeCardsContainer = document.getElementById('tree-cards-container');
+        const searchInput = document.getElementById('search-input');
+        const filterSelect = document.getElementById('filter-select');
+        const treeModal = document.getElementById('tree-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalTreeImage = document.getElementById('modal-tree-image');
+        const modalTreeName = document.getElementById('modal-tree-name');
+        const modalTreeFamily = document.getElementById('modal-tree-family');
+        const modalTreeScientificName = document.getElementById('modal-tree-scientific-name');
+        const modalTreeStatus = document.getElementById('modal-tree-status');
+        const homeBtn = document.getElementById('home-btn');
+        const aboutBtn = document.getElementById('about-btn');
+        const homeSection = document.getElementById('home-section');
+        const aboutSection = document.getElementById('about-section');
+
+        function renderTrees(filteredTrees) {
+            treeCardsContainer.innerHTML = ''; 
+            if (filteredTrees.length === 0) {
+                treeCardsContainer.innerHTML = '<p class="col-span-full text-center text-gray-600 text-xl">No se encontraron árboles que coincidan con su búsqueda o filtro.</p>';
+                return;
+            }
+
+            filteredTrees.forEach(tree => {
+                const card = document.createElement('div');
+                card.className = 'tree-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300';
+                card.innerHTML = `
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                        ${tree.imageCode || '<img src="https://placehold.co/400x300/4CAF50/FFFFFF?text=Imagen+No+Disponible" alt="Imagen No Disponible" class="w-full h-48 object-cover rounded-t-lg">'}
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-green-800 mb-1">${tree.name}</h3>
+                        <p class="text-sm text-gray-600">Familia: ${tree.family}</p>
+                        <p class="text-sm text-gray-600 italic">${tree.scientificName}</p>
+                        <p class="text-md font-medium mt-2 ${getStatusColorClass(tree.status)}">${tree.status}</p>
+                    </div>
+                `;
+                card.addEventListener('click', () => openModal(tree));
+                treeCardsContainer.appendChild(card);
+            });
+        }
+        function getStatusColorClass(status) {
+            switch (status) {
+                case "En peligro":
+                    return "text-red-600";
+                case "Vulnerable":
+                    return "text-orange-500";
+                case "No en peligro":
+                    return "text-green-600";
+                case "Sin datos específicos":
+                default:
+                    return "text-gray-500";
+            }
+        }
+
+        // Filter and Search Logic
+        function filterAndSearchTrees() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedStatus = filterSelect.value;
+
+            let filtered = trees.filter(tree => {
+                const matchesSearch = tree.name.toLowerCase().includes(searchTerm) ||
+                                tree.scientificName.toLowerCase().includes(searchTerm) ||
+                                tree.family.toLowerCase().includes(searchTerm);
+                const matchesStatus = selectedStatus === "Todos" || tree.status === selectedStatus;
+                return matchesSearch && matchesStatus;
+            });
+
+            renderTrees(filtered);
+        }
+
+        // Modal Functions
+        function openModal(tree) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = tree.imageCode;
+            const imgElement = tempDiv.querySelector('img');
+            if (imgElement) {
+                modalTreeImage.src = imgElement.src;
+                modalTreeImage.alt = imgElement.alt;
+            } else {
+                modalTreeImage.src = "https://placehold.co/400x300/4CAF50/FFFFFF?text=Imagen+No+Disponible";
+                modalTreeImage.alt = "Imagen No Disponible";
+            }
+
+
+            modalTreeName.textContent = tree.name;
+            modalTreeFamily.textContent = `Familia: ${tree.family}`;
+            modalTreeScientificName.textContent = tree.scientificName;
+            modalTreeStatus.textContent = `Estado: ${tree.status}`;
+            modalTreeStatus.className = `text-xl font-semibold mt-2 ${getStatusColorClass(tree.status)}`;
+            treeModal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            treeModal.classList.add('hidden');
+        }
+
+        
+        searchInput.addEventListener('input', filterAndSearchTrees);
+        filterSelect.addEventListener('change', filterAndSearchTrees);
+        closeModalBtn.addEventListener('click', closeModal);
+        treeModal.addEventListener('click', (e) => {
+            if (e.target === treeModal) {
+                closeModal();
+            }
+        });
+
+        
+        homeBtn.addEventListener('click', () => {
+            homeSection.classList.remove('hidden');
+            aboutSection.classList.add('hidden');
+            filterAndSearchTrees(); 
+        });
+
+        aboutBtn.addEventListener('click', () => {
+            homeSection.classList.add('hidden');
+            aboutSection.classList.remove('hidden');
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAndSearchTrees();
+        });
+    </script>
 </body>
 </html>
