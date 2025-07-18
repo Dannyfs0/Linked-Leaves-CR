@@ -200,7 +200,7 @@ main {
 }
 
 .tree-card p {
-    font-size: 0.9em; /* AJUSTADO: Más pequeño para la descripción */
+    font-size: 1.6em; /* AJUSTADO: Más pequeño para la descripción */
     color: #2e7d32;
     margin: 0 10px 8px; /* AJUSTADO: Márgenes para la descripción */
     flex-grow: 1; 
@@ -509,7 +509,7 @@ footer {
         white-space: normal; /* Permite que el nombre ocupe varias líneas si es largo */
     }
     .tree-card p {
-        font-size: 0.8em; /* Ligeramente más pequeño para la descripción */
+        font-size: 1.8em; /* Ligeramente más pequeño para la descripción */
         margin: 0 10px 8px; /* Ajuste para la descripción */
     }
 
